@@ -2,6 +2,8 @@ export interface ParamsUrl {
   _limit?:number,
   _page?:string,
   _search?:string
+
+  [key:string]:any
 }
 
 export interface PaginationList {

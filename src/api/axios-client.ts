@@ -8,7 +8,12 @@ const axiosClient = axios.create({
     "content-type": "application/json",
   },
   responseType: "json",
-  // paramsSerializer: (params: ParamsUrl) => queryString.stringify(params),
+  // paramsSerializer: {
+  //   encode:(params)=>{
+  //     console.log('params =>', params)
+  //    return queryString.stringify(params)
+  //   }
+  // },
 });
 
 axiosClient.interceptors.request.use(
@@ -17,12 +22,7 @@ axiosClient.interceptors.request.use(
     if (accessToken) {
       config.headers!.Authorization = `Bearer ${accessToken}`;
 
-      //         Example 2:
-
-      // config.headers = config.headers ?? {};
-      // Example 3:
-
-      // if(!config.headers) config.headers =  {};
+ 
     }
     return config;
   },

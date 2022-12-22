@@ -49,7 +49,7 @@ export function Menu(props: MenuProps) {
               key={menu.path}
               className={`group ${
                 pathname === menu.path
-                  ? "bg-[#ffffff1a] border-l-[3px] border-solid border-[#3b68ef]"
+                  ? "bg-[#ffffff1a] border-r-[3px] border-solid border-[#3b68ef]"
                   : ""
               }`}
             >
@@ -80,6 +80,16 @@ export function Menu(props: MenuProps) {
       {/* playlist */}
       <div className="pl-[25px] my-[16px]">
         <p className="uppercase text-[16px] text-[white]">Danh sách playlist</p>
+      </div>
+
+      {/* upgrade vip */}
+      <div className="px-2 py-[18px] rounded-lg text-center bg-gradient-to-br from-[#5a4be7] to-[#c86dd7] my-[10px] mx-[20px]">
+        <p className="mb-[10px] text-white text-[13px]">
+          Nghe nhạc không quảng cáo cùng kho nhạc VIP
+        </p>
+        <span className="inline-block bg-[#ffdb00] text-black py-[10px] px-[35px] text-[12px] uppercase rounded-xl cursor-pointer hover:bg-[#e5c500]">
+          Nâng cấp vip
+        </span>
       </div>
     </nav>
   );

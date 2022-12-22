@@ -27,11 +27,9 @@ const routes = [
   {
     path: "/demo",
     element: (
-      <PrivateRoute>
-        <DefaultLayout>
-          <Demo />
-        </DefaultLayout>
-      </PrivateRoute>
+      <DefaultLayout>
+        <Demo />
+      </DefaultLayout>
     ),
   },
   {

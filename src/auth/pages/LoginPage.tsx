@@ -1,7 +1,7 @@
 import * as React from "react";
 
-export interface LoginPageProps {}
+interface LoginPageProps {}
 
-export function LoginPage(props: LoginPageProps) {
+export default function LoginPage(props: LoginPageProps) {
   return <div>login page</div>;
 }

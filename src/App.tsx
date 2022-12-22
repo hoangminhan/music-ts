@@ -1,20 +1,44 @@
+import "antd/dist/reset.css";
+
 import { useAppDispatch } from "app/store";
 import { getListMusicAsyncThunk } from "features/home-page";
-import React, { useEffect, useState } from "react";
-import "antd/dist/reset.css";
+import { lazy, useEffect } from "react";
 import "./App.css";
-import {
-  DesktopOutlined,
-  FileOutlined,
-  PieChartOutlined,
-  TeamOutlined,
-  UserOutlined,
-} from "@ant-design/icons";
-import type { MenuProps } from "antd";
-import { Breadcrumb, Layout, Menu, theme } from "antd";
-const { Header, Content, Footer, Sider } = Layout;
 
-// hello
+import { PrivateRoute } from "component/common";
+import { DefaultLayout } from "layout";
+import Demo from "pages/demo";
+import { useRoutes } from "react-router-dom";
+
+const LoginPage = lazy(() => import("auth/pages/LoginPage"));
+const NotFoundPage = lazy(() => import("pages/not-found"));
+const HomePage = lazy(() => import("pages/home-page"));
+
+const routes = [
+  { path: "*", element: <NotFoundPage /> },
+  {
+    path: "/",
+    element: (
+      <DefaultLayout>
+        <HomePage />
+      </DefaultLayout>
+    ),
+  },
+  {
+    path: "/demo",
+    element: (
+      <PrivateRoute>
+        <DefaultLayout>
+          <Demo />
+        </DefaultLayout>
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: "/login",
+    element: <LoginPage />,
+  },
+];
 
 function App() {
   const dispatch = useAppDispatch();
@@ -27,33 +51,27 @@ function App() {
     );
   }, [dispatch]);
 
-  type MenuItem = Required<MenuProps>["items"][number];
+  let mainContent = useRoutes(routes);
+  return <div>{mainContent}</div>;
+  // return (
+  //   <Routes>
+  //     {/* not found */}
+  //     <Route path="*" element={<NotFoundPage />} />
 
-  function getItem(
-    label: React.ReactNode,
-    key: React.Key,
-    icon?: React.ReactNode,
-    children?: MenuItem[]
-  ): MenuItem {
-    return {
-      key,
-      icon,
-      children,
-      label,
-    } as MenuItem;
-  }
-  const items: MenuItem[] = [
-    getItem("Option 1", "1", <PieChartOutlined />),
-    getItem("Option 2", "2", <DesktopOutlined />),
-    getItem("User", "sub1", <UserOutlined />),
-    getItem("Team", "sub2", <TeamOutlined />),
-    getItem("Files", "9", <FileOutlined />),
-  ];
-  const [collapsed, setCollapsed] = useState(false);
-  const {
-    token: { colorBgContainer },
-  } = theme.useToken();
-  return <></>;
+  //     <Route path="/" element={<HomePage />} />
+
+  //     <Route
+  //       path="/demo"
+  //       element={
+  //         <PrivateRoute>
+  //           <Demo />
+  //         </PrivateRoute>
+  //       }
+  //     />
+
+  //     <Route path="/login" element={<LoginPage />} />
+  //   </Routes>
+  // );
 }
 
 export default App;

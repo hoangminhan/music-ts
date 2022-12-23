@@ -2,10 +2,12 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 import { Autoplay, Pagination, Navigation, EffectCoverflow } from "swiper";
 import { bannerDefault } from "const";
+
 interface HeroProps {}
 export function Hero(props: HeroProps) {
   return (
     <Swiper
+      className="mt-10"
       spaceBetween={50}
       slidesPerView={2}
       effect={"coverflow"}
@@ -44,7 +46,6 @@ export function Hero(props: HeroProps) {
           spaceBetween: 50,
         },
       }}
-      // className="mySwiper"
     >
       {bannerDefault.map((banner, index) => {
         return (

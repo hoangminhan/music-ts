@@ -39,7 +39,6 @@ export function Menu(props: MenuProps) {
   // <FontAwesomeIcon icon="fa-regular fa-house" /> ffffff1a
   const location = useLocation();
   const { pathname } = location;
-  console.log({ location });
   return (
     <nav className="flex-1">
       <ul>

@@ -1,14 +1,15 @@
 import "antd/dist/reset.css";
-
-import { useAppDispatch } from "app/store";
-import { getListMusicAsyncThunk } from "features/home-page";
-import { lazy, useEffect } from "react";
+import { lazy } from "react";
 import "./App.css";
-
 import { PrivateRoute } from "component/common";
 import { DefaultLayout } from "layout";
 import Demo from "pages/demo";
 import { useRoutes } from "react-router-dom";
+
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/effect-coverflow";
 
 const LoginPage = lazy(() => import("auth/pages/LoginPage"));
 const NotFoundPage = lazy(() => import("pages/not-found"));
@@ -39,18 +40,8 @@ const routes = [
 ];
 
 function App() {
-  const dispatch = useAppDispatch();
-  useEffect(() => {
-    dispatch(
-      getListMusicAsyncThunk({
-        typeMusic: "trending",
-        params: { _limit: 20 },
-      })
-    );
-  }, [dispatch]);
-
   let mainContent = useRoutes(routes);
-  return <div>{mainContent}</div>;
+  return <div className="overflow-hidden">{mainContent}</div>;
   // return (
   //   <Routes>
   //     {/* not found */}

@@ -1,5 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { PaginationList } from "types";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { PaginationList, ResponseList } from "types";
 import { MusicProperties } from "types/music.types";
 import { getListMusicAsyncThunk } from "./homePage-asyn";
 
@@ -27,10 +27,10 @@ export const homePageSlice = createSlice({
     builder.addCase(getListMusicAsyncThunk.pending, (state) => {
       state.isLoadingHomePage = true;
     });
-    builder.addCase(getListMusicAsyncThunk.fulfilled, (state, action) => {
-      const { pagination, data } = action.payload;
+    builder.addCase(getListMusicAsyncThunk.fulfilled, (state, action:PayloadAction<{pagination:PaginationList,data:MusicProperties[]}>) => {
+      const { pagination, data } = action.payload
+      ;
       state.isLoadingHomePage = false;
-      console.log("///", data);
       state.listMusic = data;
       state.pagination = pagination;
     });

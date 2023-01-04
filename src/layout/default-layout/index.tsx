@@ -12,12 +12,12 @@ interface DefaultLayoutProps {
 export const DefaultLayout: React.FC<DefaultLayoutProps> = (props) => {
   const { children } = props;
   return (
-    <div className="h-[100vh] bg-[#162a45] flex">
+    <div className="bg-[#162a45] flex">
       {/* sidebar */}
       <div className="overflow-hidden w-[0] lg:w-[240px] duration-150 transition-all h-full">
         <Sidebar />
       </div>
-      <div className="flex-1 px-[59px] overflow-hidden">
+      <div className="flex-1 px-[39px] tablet:px-[49px] xl:px-[59px] overflow-hidden">
         <Header />
 
         <div className="h-full">{children}</div>

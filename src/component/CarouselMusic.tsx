@@ -17,29 +17,35 @@ export function CarouselMusic(props: CarouselMusicProps) {
     <div className="mt-10">
       <h3 className="mb-3 uppercase text-[20px]">{title}</h3>
       <Swiper
-        spaceBetween={35}
-        slidesPerView={6}
+        spaceBetween={24}
+        slidesPerView={6.2}
         loop={true}
         // centeredSlides={true}
 
         navigation={false}
         modules={[Pagination, Navigation]}
-        // breakpoints={{
-        //   320: {
-        //     slidesPerView: 1,
-        //   },
-        //   640: {
-        //     slidesPerView: 1,
-        //   },
-        //   768: {
-        //     slidesPerView: 2,
-        //     spaceBetween: 40,
-        //   },
-        //   1024: {
-        //     slidesPerView: 2,
-        //     spaceBetween: 50,
-        //   },
-        // }}
+        breakpoints={{
+          320: {
+            slidesPerView: 2.2,
+            spaceBetween: 12,
+          },
+          480: {
+            slidesPerView: 3.2,
+            spaceBetween: 12,
+          },
+          640: {
+            slidesPerView: 4.2,
+            spaceBetween: 12,
+          },
+          1150: {
+            slidesPerView: 5.2,
+            spaceBetween: 18,
+          },
+          1500: {
+            slidesPerView: 6.2,
+            spaceBetween: 24,
+          },
+        }}
         // className="mySwiper"
       >
         {dataCarousel.map((carousel, index) => {

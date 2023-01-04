@@ -21,7 +21,7 @@ export function Hero(props: HeroProps) {
       loop={true}
       centeredSlides={true}
       autoplay={{
-        delay: 2500,
+        delay: 250000000,
         disableOnInteraction: false,
       }}
       pagination={{

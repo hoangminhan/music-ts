@@ -6,6 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import { store } from "./app/store";
 import { BrowserRouter } from "react-router-dom";
+import { UseContextProvider } from "context";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -14,7 +15,9 @@ root.render(
   <Suspense fallback={<div>...loading</div>}>
     <Provider store={store}>
       <BrowserRouter>
-        <App />
+        <UseContextProvider>
+          <App />
+        </UseContextProvider>
       </BrowserRouter>
     </Provider>
   </Suspense>

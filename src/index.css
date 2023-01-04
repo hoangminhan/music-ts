@@ -1,3 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .trasition-common {
+    @apply transition-all duration-150 ease-linear;
+  }
+  .padding-project {
+    @apply px-[19px] tablet:px-[49px] xl:px-[59px];
+  }
+}

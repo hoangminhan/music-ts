@@ -9,9 +9,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as React from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { MenuSidebar } from "types/menu.types";
-
-interface MenuProps {}
-
 const menus: MenuSidebar[] = [
   {
     title: "Home Page",
@@ -34,6 +31,9 @@ const menus: MenuSidebar[] = [
     path: "/dem2",
   },
 ];
+interface MenuProps {
+  handleToggleMenu: () => void;
+}
 
 export function Menu(props: MenuProps) {
   // <FontAwesomeIcon icon="fa-regular fa-house" /> ffffff1a

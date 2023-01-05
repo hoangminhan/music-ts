@@ -2,11 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  p {
+    @apply text-[13px];
+  }
+  span {
+    @apply text-[13px];
+  }
+  div {
+    @apply text-[13px];
+  }
+}
+
 @layer components {
   .trasition-common {
     @apply transition-all duration-150 ease-linear;
   }
   .padding-project {
     @apply px-[19px] tablet:px-[49px] xl:px-[59px];
+  }
+  .style-icon-header {
+    @apply hover:cursor-pointer hover:scale-110 duration-150 w-[40px] h-[40px] rounded-full bg-[#ffffff1a] flex justify-center items-center;
   }
 }

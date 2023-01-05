@@ -5,6 +5,7 @@ import { Header } from "component";
 import { Sidebar } from "component/common";
 import { ContextApp } from "context";
 import * as React from "react";
+import { AppContextInterface } from "types";
 
 interface DefaultLayoutProps {
   children: React.ReactElement;
@@ -17,7 +18,11 @@ export const DefaultLayout: React.FC<DefaultLayoutProps> = (props) => {
   const handleToggleMenu = (): void => {
     setIsToogleMenu(!isToggleMenu);
   };
-  console.log(ContextApp);
+  const stateContext = React.useContext(ContextApp);
+  if (!stateContext) {
+    return null;
+  }
+  const { themeProject } = stateContext;
 
   return (
     <div className="min-h-[100vh] bg-[#162a45] relative">

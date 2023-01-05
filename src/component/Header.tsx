@@ -7,12 +7,15 @@ import {
   faUpload,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { ContextApp } from "context";
+import { useContext } from "react";
 
 export interface HeaderProps {
   handleToggleMenu: () => void;
 }
 
 export function Header(props: HeaderProps) {
+  const { currentModal, setCurrentModal } = useContext(ContextApp);
   const { handleToggleMenu } = props;
   return (
     <div className="duration-150 transition-all h-[70px] fixed z-10 bg-[#22354e] left-0 lg:left-[240px] right-0 padding-project flex items-center justify-between">
@@ -41,17 +44,22 @@ export function Header(props: HeaderProps) {
 
       {/* action */}
       <div className="flex">
-        <div className="hover:cursor-pointer hover:scale-110 duration-150 w-[40px] h-[40px] rounded-full bg-[#ffffff1a] flex justify-center items-center">
-          <FontAwesomeIcon icon={faShirt} />
+        <div className="style-icon-header">
+          <FontAwesomeIcon
+            icon={faShirt}
+            onClick={() => {
+              setCurrentModal("modal_layout");
+            }}
+          />
         </div>
 
-        <div className="hover:cursor-pointer hover:scale-110 duration-150 w-[40px] h-[40px] rounded-full bg-[#ffffff1a] flex justify-center items-center ml-[12px]">
+        <div className="style-icon-header ml-[12px]">
           <FontAwesomeIcon icon={faUpload} />
         </div>
-        <div className="hover:cursor-pointer hover:scale-110 duration-150 w-[40px] h-[40px] rounded-full bg-[#ffffff1a] flex justify-center items-center ml-[12px]">
+        <div className="style-icon-header ml-[12px]">
           <FontAwesomeIcon icon={faGear} />
         </div>
-        <div className="hover:cursor-pointer hover:scale-110 duration-150 w-[40px] h-[40px] rounded-full bg-[#ffffff1a] flex justify-center items-center ml-[12px]">
+        <div className="style-icon-header ml-[12px]">
           <FontAwesomeIcon icon={faCircleUser} />
         </div>
       </div>

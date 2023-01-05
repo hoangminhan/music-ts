@@ -6,7 +6,6 @@ export interface IHomePageProps {}
 
 export default function HomePage(props: IHomePageProps) {
   const { handleGetListTrendingMusic, listMusic } = useHomePage();
-  console.log({ listMusic });
   useEffect(() => {
     handleGetListTrendingMusic({
       typeMusic: "trending",

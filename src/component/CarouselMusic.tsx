@@ -12,7 +12,6 @@ interface CarouselMusicProps {
 }
 export function CarouselMusic(props: CarouselMusicProps) {
   const { dataCarousel, title } = props;
-  console.log({ dataCarousel });
   return (
     <div className="mt-10">
       <h3 className="mb-3 uppercase text-[20px]">{title}</h3>

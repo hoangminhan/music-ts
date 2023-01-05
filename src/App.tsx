@@ -10,6 +10,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/effect-coverflow";
+import ModalApp from "modals";
 
 const LoginPage = lazy(() => import("auth/pages/LoginPage"));
 const NotFoundPage = lazy(() => import("pages/not-found"));
@@ -41,7 +42,12 @@ const routes = [
 
 function App() {
   let mainContent = useRoutes(routes);
-  return <div className="overflow-hidden">{mainContent}</div>;
+  return (
+    <>
+      <div className="overflow-hidden">{mainContent}</div>
+      <ModalApp />
+    </>
+  );
   // return (
   //   <Routes>
   //     {/* not found */}

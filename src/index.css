@@ -12,6 +12,30 @@
   div {
     @apply text-[13px];
   }
+  :root {
+    --background-primary: theme("colors.white");
+    --background-secondary: theme("colors.gray.200");
+    --background-sidebar: theme("colors.gray.200");
+    --background-content: #fff;
+    --background-modal: theme("colors.gray.100");
+    --background-input: theme("colors.gray.200");
+
+    --text-primary: #32323d;
+    --text-second: theme("colors.gray.600");
+
+    --hover-text-item: #8d22c3;
+    --hover-bg-item: #0000000d;
+
+    --border-color-light: #ccc;
+  }
+
+  [data-theme="Dark"] {
+    --background-primary: theme("colors.black");
+    --background-secondary: theme("colors.gray.700");
+    --background-sidebar: theme("colors.black");
+    --background-content: theme("colors.black");
+    --background-modal: theme("colors.black");
+  }
 }
 
 @layer components {
@@ -19,9 +43,9 @@
     @apply transition-all duration-150 ease-linear;
   }
   .padding-project {
-    @apply px-[19px] tablet:px-[49px] xl:px-[59px];
+    @apply px-[19px] tablet:px-[39px] xl:px-[49px];
   }
   .style-icon-header {
-    @apply hover:cursor-pointer hover:scale-110 duration-150 w-[40px] h-[40px] rounded-full bg-[#ffffff1a] flex justify-center items-center;
+    @apply hover:cursor-pointer hover:scale-110 duration-150 w-[40px] h-[40px] rounded-full bg-bgSecond flex justify-center items-center;
   }
 }

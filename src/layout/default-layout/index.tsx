@@ -25,7 +25,7 @@ export const DefaultLayout: React.FC<DefaultLayoutProps> = (props) => {
   const { themeProject } = stateContext;
 
   return (
-    <div className="min-h-[100vh] bg-[#162a45] relative">
+    <div className="min-h-[100vh] bg-bgContent relative">
       {/* sidebar */}
 
       <div
@@ -35,7 +35,7 @@ export const DefaultLayout: React.FC<DefaultLayoutProps> = (props) => {
       >
         <Sidebar handleToggleMenu={handleToggleMenu} />
       </div>
-      <div className="trasition-common ml-0 lg:ml-[240px] px-[19px] padding-project overflow-hidden">
+      <div className="trasition-common ml-0 lg:ml-[240px] padding-project overflow-hidden">
         <Header handleToggleMenu={handleToggleMenu} />
 
         <div className="h-full">{children}</div>

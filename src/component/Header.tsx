@@ -18,7 +18,7 @@ export function Header(props: HeaderProps) {
   const { currentModal, setCurrentModal } = useContext(ContextApp);
   const { handleToggleMenu } = props;
   return (
-    <div className="duration-150 transition-all h-[70px] fixed z-10 bg-[#22354e] left-0 lg:left-[240px] right-0 padding-project flex items-center justify-between">
+    <div className="duration-150 transition-all padding-project h-[70px] fixed z-10 bg-bgContent left-0 lg:left-[240px] right-0 flex items-center justify-between border-solid border-b-[1px] border-borderLight">
       {/* menu mobile */}
       <div className="mr-2 block lg:hidden">
         <FontAwesomeIcon
@@ -29,14 +29,14 @@ export function Header(props: HeaderProps) {
         />
       </div>
       {/* search */}
-      <div className="bg-[#354258] rounded-[20px] h-[40px] flex items-center relative w-[100%] max-w-[440px] mr-8">
+      <div className="bg-bgInput rounded-[20px] h-[40px] flex items-center relative w-[100%] max-w-[440px] mr-8">
         <button className="absolute left-4">
           <FontAwesomeIcon icon={faSearch} />
         </button>
         <div>
           <input
             type="search"
-            className="h-[40px] absolute top-0 left-10 right-0 bg-[#354258] border-none outline-none rounded-[20px]"
+            className="h-[40px] absolute top-0 left-10 right-0 bg-bgInput border-none outline-none rounded-[20px]"
             placeholder="Tìm kiếm bài hát, nghệ sĩ, lời bài hát..."
           />
         </div>
@@ -50,17 +50,18 @@ export function Header(props: HeaderProps) {
             onClick={() => {
               setCurrentModal("modal_layout");
             }}
+            className="text-secondText"
           />
         </div>
 
         <div className="style-icon-header ml-[12px]">
-          <FontAwesomeIcon icon={faUpload} />
+          <FontAwesomeIcon icon={faUpload} className="text-secondText" />
         </div>
         <div className="style-icon-header ml-[12px]">
-          <FontAwesomeIcon icon={faGear} />
+          <FontAwesomeIcon icon={faGear} className="text-secondText" />
         </div>
         <div className="style-icon-header ml-[12px]">
-          <FontAwesomeIcon icon={faCircleUser} />
+          <FontAwesomeIcon icon={faCircleUser} className="text-secondText" />
         </div>
       </div>
     </div>

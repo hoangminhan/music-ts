@@ -2,7 +2,21 @@
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        bgPrimary: "var(--background-primary)",
+        bgSecond: "var(--background-secondary)",
+        bgSidebar: "var(--background-sidebar)",
+        bgContent: "var(--background-content)",
+        bgInput: "var(--background-input)",
+        bgModal: "var(--background-modal)",
+        primaryText: "var(--text-primary)",
+        secondText: "var(--text-second)",
+        hoverItem: "var(--hover-text-item)",
+        hoverBgItem: "var(--hover-bg-item)",
+        borderLight: "var(--border-color-light)",
+      },
+    },
     screens: {
       xs: "480px",
       sm: "640px",

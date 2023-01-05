@@ -46,24 +46,24 @@ export function Menu(props: MenuProps) {
           return (
             <li
               key={menu.path}
-              className={`group ${
+              className={`group hover:bg-hoverBgItem transition-common ${
                 pathname === menu.path
-                  ? "bg-[#ffffff1a] border-r-[3px] border-solid border-[#3b68ef]"
+                  ? "bg-hoverBgItem border-r-[3px] border-solid border-hoverItem"
                   : ""
               }`}
             >
               <Link to={menu.path}>
-                <div className="flex px-[25px] py-2">
+                <div className="flex px-[25px] py-2 text-primaryText">
                   {" "}
                   <FontAwesomeIcon
                     icon={menu.icon}
-                    className={`group-hover:text-white ${
-                      pathname === menu.path ? "text-white" : ""
+                    className={`group-hover:text-hoverItem text-[14px] ${
+                      pathname === menu.path ? "text-hoverItem" : ""
                     }`}
                   />
                   <p
-                    className={`flex-1 ml-2 group-hover:text-white ${
-                      pathname === menu.path ? "text-white" : ""
+                    className={`flex-1 ml-2 text-[14px] group-hover:text-hoverItem font-[700] text-primaryText ${
+                      pathname === menu.path ? "text-hoverItem" : ""
                     }`}
                   >
                     {menu.title}
@@ -78,7 +78,9 @@ export function Menu(props: MenuProps) {
       <div className="h-[1px] bg-[#524c4c] mt-4"></div>
       {/* playlist */}
       <div className="pl-[25px] my-[16px]">
-        <p className="uppercase text-[16px] text-[white]">Danh sách playlist</p>
+        <p className="uppercase text-[16px] text-primaryText">
+          Danh sách playlist
+        </p>
       </div>
 
       {/* upgrade vip */}
@@ -92,7 +94,7 @@ export function Menu(props: MenuProps) {
       </div>
     </nav>
   );
-  // return (
+
   //   <ul className="flex-1">
   //     <li
   //       className={`group ${

@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import { AppContextInterface } from "types";
 interface propsContext {
   children: React.ReactElement;
@@ -16,7 +16,10 @@ export const ContextApp = createContext<AppContextInterface>({
 });
 
 export const UseContextProvider = ({ children }: propsContext) => {
-  const [themeProject, setThemeProject] = useState<string>("");
+  const [themeProject, setThemeProject] = useState<string>(
+    sessionStorage.getItem("currentTheme") || "Light"
+  );
+  console.log({ themeProject });
   const [currentModal, setCurrentModal] = useState<string>("");
   // const stateContext: AppContextInterface | null = {
   //   themeProject,
@@ -24,6 +27,11 @@ export const UseContextProvider = ({ children }: propsContext) => {
   //   currentModal,
   //   setCurrentModal,
   // };
+  useEffect(() => {
+    const htmlElement = document.getElementsByTagName("html");
+    htmlElement[0].setAttribute("data-theme", themeProject);
+    sessionStorage.setItem("currentTheme", themeProject);
+  }, [themeProject]);
 
   return (
     <ContextApp.Provider

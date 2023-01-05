@@ -9,8 +9,10 @@ export interface ModalLayoutProps {
 }
 
 export function ModalLayout(props: ModalLayoutProps) {
-  console.log("modal layout");
-  const stateContext: AppContextInterface | null = React.useContext(ContextApp);
+  const { themeProject, setThemeProject } = React.useContext(ContextApp);
+  const handleChangeDataTheme = (theme: string) => {
+    setThemeProject(theme);
+  };
 
   return (
     <div className="modallalsdasd">
@@ -22,20 +24,27 @@ export function ModalLayout(props: ModalLayoutProps) {
         <div className="flex flex-wrap gap-x-4 gap-y-6">
           {THEME_DARK.map((theme, index) => {
             return (
-              <div key={theme.value}>
+              <div
+                key={theme.value}
+                onClick={() => {
+                  handleChangeDataTheme(theme.value);
+                }}
+              >
                 {/* image */}
-                <div className="relative">
+                <div className="relative group">
                   <img
                     src={theme.img}
                     alt=""
                     className="w-[125px] h-[85px] rounded-[4px] overflow-hidden"
                   />
+                  {/* opacity */}
+                  <div className="absolute z-[1] inset-0 bg-[#00000080] invisible group-hover:visible opacity-60"></div>
                   {/* button */}
-                  <div className="absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2">
+                  <div className="invisible group-hover:visible trasition-common absolute z-[2] top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2">
                     <div className="w-[100px]  mb-2 text-center py-[5px] rounded-full bg-[#0000004d] text-white cursor-pointer">
                       <p className="text-[9px] uppercase font-bold">Áp dụng</p>
                     </div>
-                    <div className="w-[100px]  text-center py-[5px] rounded-full bg-[#0000004d] cursor-pointer hover:opacity-80">
+                    <div className="w-[100px] border-solid border-[1px] border-white text-center py-[5px] rounded-full bg-[#0000004d] cursor-pointer hover:opacity-80">
                       <p className="text-[9px] uppercase font-bold">
                         Xem trước
                       </p>

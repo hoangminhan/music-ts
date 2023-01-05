@@ -26,7 +26,6 @@ export default function ModalApp(props: ModalAppProps) {
   const ModalRender: any = React.useMemo(() => {
     return handleGetCurrentModal(currentModal);
   }, [currentModal]);
-  console.log(ModalRender);
   if (!ModalRender) return <></>;
 
   return (

@@ -13,7 +13,8 @@ export function Sidebar(props: SidebarProps) {
 
   return (
     <div
-      className={`bg-[#22354e] border-r-[1px] border-solid border-[#ffffff1a] h-full`}
+      // className={`bg-[#22354e] border-r-[1px] border-solid border-[#ffffff1a] h-full`}
+      className={`bg-bgSidebar border-r-[1px] border-solid border-[#ffffff1a] h-full`}
     >
       <div className="flex flex-col h-full">
         <Logo />

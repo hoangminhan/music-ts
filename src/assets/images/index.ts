@@ -11,6 +11,7 @@ import lightTheme from "./light.jpg";
 import greyTheme from "./gray.jpg";
 import greenLightTheme from "./green-light.jpg";
 import lightBlueTheme from "./blue-light.jpg";
+import pinkLightTheme from "./pink-light.jpg";
 
 export const imgSource = {
   logo,
@@ -26,4 +27,5 @@ export const imgSource = {
   greyTheme,
   greenLightTheme,
   lightBlueTheme,
+  pinkLightTheme
 };

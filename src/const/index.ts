@@ -36,12 +36,12 @@ export const THEME_DARK = [
   { value: "Bluelight", color: "black", title: "Xanh biển",img:imgSource.blueLightTheme  },
   { value: "Green", color: "black", title: "Xanh lá",img:imgSource.greenTheme  },
   { value: "Brown", color: "black", title: "Nâu",img:imgSource.brownTheme  },
-  { value: "Red", color: "black", title: "Hồng",img:imgSource.pinkTheme  },
-  { value: "Pink", color: "black", title: "Đỏ",img:imgSource.redTheme  },
+  { value: "Pink", color: "black", title: "Hồng",img:imgSource.pinkTheme  },
+  { value: "Red", color: "black", title: "Đỏ",img:imgSource.redTheme  },
 ];
 export const THEME_LIGHT = [
   { value: "Light", color: "black", title: "Sáng",img:imgSource.lightTheme  },
   { value: "Grey", color: "black", title: "Xám",img:imgSource.greyTheme  },
   { value: "Greenlight", color: "black", title: "Xanh nhạt",img:imgSource.greenLightTheme  },
-  { value: "Lightblue", color: "black", title: "Hồng cánh sen",img:imgSource.lightBlueTheme  },
+  { value: "Pinklight", color: "black", title: "Hồng cánh sen",img:imgSource.pinkLightTheme  },
 ];

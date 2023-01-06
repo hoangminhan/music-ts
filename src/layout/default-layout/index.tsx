@@ -25,7 +25,7 @@ export const DefaultLayout: React.FC<DefaultLayoutProps> = (props) => {
   const { themeProject } = stateContext;
 
   return (
-    <div className="min-h-[100vh] bg-bgContent relative">
+    <div className="min-h-[100vh] bg-bgPrimary relative">
       {/* sidebar */}
 
       <div

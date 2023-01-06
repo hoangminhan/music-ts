@@ -19,7 +19,9 @@ const handleGetCurrentModal = (type: string) => {
 };
 export default function ModalApp(props: ModalAppProps) {
   console.log("render");
-  const { currentModal, setCurrentModal } = React.useContext(ContextApp);
+  const { themeProject, currentModal, setCurrentModal } = React.useContext(
+    ContextApp
+  );
   console.log({ currentModal });
   // const stateContext: AppContextInterface | null = React.useContext(ContextApp);
 
@@ -35,6 +37,8 @@ export default function ModalApp(props: ModalAppProps) {
       width={900}
       onCancel={() => {
         setCurrentModal("");
+        const htmlElement = document.getElementsByTagName("html");
+        htmlElement[0].setAttribute("data-theme", themeProject);
       }}
       centered={true}
     >

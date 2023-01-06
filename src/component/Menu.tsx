@@ -48,12 +48,12 @@ export function Menu(props: MenuProps) {
               key={menu.path}
               className={`group hover:bg-hoverBgItem transition-common ${
                 pathname === menu.path
-                  ? "bg-hoverBgItem border-r-[3px] border-solid border-hoverItem"
+                  ? "bg-hoverBgItem border-r-[3px] border-solid border-bgButtonPrimary"
                   : ""
               }`}
             >
               <Link to={menu.path}>
-                <div className="flex px-[25px] py-2 text-primaryText">
+                <div className="flex px-[25px] py-3 text-sidebarText">
                   {" "}
                   <FontAwesomeIcon
                     icon={menu.icon}
@@ -62,7 +62,7 @@ export function Menu(props: MenuProps) {
                     }`}
                   />
                   <p
-                    className={`flex-1 ml-2 text-[14px] group-hover:text-hoverItem font-[700] text-primaryText ${
+                    className={`flex-1 ml-2 text-[14px] group-hover:text-hoverItem font-[700] text-sidebarText ${
                       pathname === menu.path ? "text-hoverItem" : ""
                     }`}
                   >
@@ -78,7 +78,7 @@ export function Menu(props: MenuProps) {
       <div className="h-[1px] bg-[#524c4c] mt-4"></div>
       {/* playlist */}
       <div className="pl-[25px] my-[16px]">
-        <p className="uppercase text-[16px] text-primaryText">
+        <p className="uppercase text-[16px] text-sidebarText">
           Danh sách playlist
         </p>
       </div>

@@ -9,12 +9,15 @@ module.exports = {
         bgSidebar: "var(--background-sidebar)",
         bgModal: "var(--background-modal)",
         bgButtonPrimary: "var(--bg-button-primary)",
+        bgPlayer: "var(--bg-player)",
+
         sidebarText: "var(--text-sidebar)",
         primaryText: "var(--text-primary)",
         secondText: "var(--text-second)",
         hoverItem: "var(--hover-text-item)",
         hoverBgItem: "var(--hover-bg-item)",
         borderLight: "var(--border-color-light)",
+        borderTopPlayer: "var(--border-top-player)",
       },
     },
     screens: {

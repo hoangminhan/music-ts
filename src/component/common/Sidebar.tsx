@@ -19,7 +19,7 @@ export function Sidebar(props: SidebarProps) {
       <div className="flex flex-col h-full">
         <Logo />
         <Menu handleToggleMenu={handleToggleMenu} />
-        <div className="absolute top-3 right-3">
+        <div className="absolute top-3 right-3 visible lg:hidden">
           <FontAwesomeIcon
             icon={faArrowLeft}
             onClick={() => {

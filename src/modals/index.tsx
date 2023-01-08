@@ -18,11 +18,9 @@ const handleGetCurrentModal = (type: string) => {
   }
 };
 export default function ModalApp(props: ModalAppProps) {
-  console.log("render");
   const { themeProject, currentModal, setCurrentModal } = React.useContext(
     ContextApp
   );
-  console.log({ currentModal });
   // const stateContext: AppContextInterface | null = React.useContext(ContextApp);
 
   const ModalRender: any = React.useMemo(() => {

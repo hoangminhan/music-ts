@@ -4,7 +4,7 @@
 
 @layer base {
   p {
-    @apply text-[13px];
+    @apply text-[13px] text-primaryText;
   }
   span {
     @apply text-[13px];
@@ -17,7 +17,6 @@
     --background-primary: theme("colors.white");
     --background-secondary: theme("colors.gray.200");
     --background-sidebar: theme("colors.gray.200");
-
     --background-modal: theme("colors.gray.200");
     --bg-button-primary: #8d22c3;
 
@@ -29,20 +28,21 @@
     --hover-bg-item: #0000000d;
 
     --border-color-light: #ccc;
+    --border-top-player: #ffffff1a;
   }
 
   [data-theme="Dark"] {
     --background-primary: #1e1e1e;
     --background-secondary: #292929;
     --background-sidebar: #292929;
-
+    --bg-player: #181818;
     --background-modal: #333333;
     --bg-button-primary: #8d22c3;
 
     --text-sidebar: #a0a0a0;
     --text-primary: #fff;
 
-    --text-second: #fff;
+    --text-second: #ffffff80;
 
     --hover-text-item: #fff;
     --hover-bg-item: #404040;
@@ -156,7 +156,7 @@
 
     --text-second: #fff;
 
-    --hover-text-item: #fff;
+    --hover-text-item: #ca4974;
     --hover-bg-item: #394a61;
 
     --border-color-light: #ccc;
@@ -210,7 +210,7 @@
 
     --text-second: #495057;
 
-    --hover-text-item: #844d4d;
+    --hover-text-item: #0e8080;
     --hover-bg-item: #cfcdc9;
 
     --border-color-light: #ccc;
@@ -228,7 +228,7 @@
 
     --text-second: #495057;
 
-    --hover-text-item: #844d4d;
+    --hover-text-item: #0e8080;
     --hover-bg-item: #cfcdc9;
 
     --border-color-light: #ccc;
@@ -246,7 +246,7 @@
 
     --text-second: #495057;
 
-    --hover-text-item: #844d4d;
+    --hover-text-item: #b72479;
     --hover-bg-item: #eedada;
 
     --border-color-light: #ccc;
@@ -256,11 +256,15 @@
 .ant-modal-content {
   background-color: var(--background-modal) !important;
 }
+
 .ant-modal-close-x {
   color: var(--text-primary) !important;
 }
 .anticon {
   font-size: 20px !important;
+}
+.popover-music-ts .ant-popover-inner {
+  background-color: var(--background-modal) !important;
 }
 
 @layer components {
@@ -272,5 +276,11 @@
   }
   .style-icon-header {
     @apply hover:cursor-pointer hover:scale-110 duration-150 w-[40px] h-[40px] rounded-full bg-bgSecond flex justify-center items-center;
+  }
+  .center-element {
+    @apply top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2;
+  }
+  .flex-center-element {
+    @apply flex justify-center items-center;
   }
 }

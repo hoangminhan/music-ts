@@ -24,3 +24,7 @@ p {
   font-size: 16px;
   color: #dadada;
 }
+div,
+p {
+  work-break: break-word;
+}

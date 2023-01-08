@@ -30,7 +30,7 @@ export function ModalLayout(props: ModalLayoutProps) {
       <h2 className="text-[24px] text-primaryText">Giao Diện</h2>
       {/* Dark color*/}
       <div>
-        <p className="text-black my-4 text-primaryText text-[18px]">Màu Tối</p>
+        <p className="my-4 text-primaryText text-[18px]">Màu Tối</p>
         <div className="flex flex-wrap gap-x-4 gap-y-6">
           {THEME_DARK.map((theme, index) => {
             return (
@@ -88,7 +88,7 @@ export function ModalLayout(props: ModalLayoutProps) {
       </div>
       {/* Light color*/}
       <div>
-        <p className="text-black my-4 text-primaryText text-[18px]">Màu Sáng</p>
+        <p className="my-4 text-primaryText text-[18px]">Màu Sáng</p>
 
         <div className="flex flex-wrap gap-x-4 gap-y-6">
           {THEME_LIGHT.map((theme, index) => {

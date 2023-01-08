@@ -28,3 +28,9 @@ export interface ParamsUrlMusic {
   typeMusic:string,
   params:ParamsUrl
 }
+
+export interface ParamsPlayerMusic {
+  isPlay:boolean,
+  isRandom:boolean,
+  isLoop:boolean
+}

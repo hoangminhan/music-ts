@@ -38,6 +38,7 @@
     --bg-player: #181818;
     --background-modal: #333333;
     --bg-button-primary: #8d22c3;
+    --bg-hover-drawer: #ffffff1a;
 
     --text-sidebar: #a0a0a0;
     --text-primary: #fff;
@@ -251,6 +252,12 @@
 
     --border-color-light: #ccc;
   }
+}
+.ant-drawer .ant-drawer-content {
+  background-color: var(--background-modal) !important;
+}
+.ant-drawer-body {
+  padding: 14px 8px !important;
 }
 
 .ant-modal-content {

@@ -8,9 +8,12 @@ interface propsContext {
 export const ContextApp = createContext<AppContextInterface>({
   currentModal: "",
   themeProject: "",
+  isPlaying: false,
   setThemeProject: function (theme: string): void {},
   setCurrentModal: function (nameModal: string): void {},
   setCurrentPlayer: function (value: MusicProperties): void {},
+  setListPlay: function (value: MusicProperties[]): void {},
+  setIsPlaying: function (value: boolean): void {},
 });
 
 export const UseContextProvider = ({ children }: propsContext) => {
@@ -18,17 +21,22 @@ export const UseContextProvider = ({ children }: propsContext) => {
     sessionStorage.getItem("currentTheme") || "Light"
   );
   const [currentModal, setCurrentModal] = useState<string>("");
-
   const [currentPlayer, setCurrentPlayer] = useState<MusicProperties>();
-  console.log({ currentPlayer });
-
+  // danh sach phat
+  const [listPlay, setListPlay] = useState<MusicProperties[]>();
+  const [isPlaying, setIsPlaying] = useState<boolean>(false);
   // add currentPlayer to session storage
   useEffect(() => {
     const carousel = sessionStorage.getItem("currentPlayer");
+    const carouselList = sessionStorage.getItem("currentPlayList");
     if (carousel) {
       setCurrentPlayer(JSON.parse(carousel));
     }
+    if (carouselList) {
+      setListPlay(JSON.parse(carouselList));
+    }
   }, []);
+
   useEffect(() => {
     const htmlElement = document.getElementsByTagName("html");
     htmlElement[0].setAttribute("data-theme", themeProject);
@@ -44,6 +52,10 @@ export const UseContextProvider = ({ children }: propsContext) => {
         setCurrentModal,
         currentPlayer,
         setCurrentPlayer,
+        listPlay,
+        setListPlay,
+        isPlaying,
+        setIsPlaying,
       }}
     >
       {children}

@@ -30,7 +30,7 @@ export interface ParamsUrlMusic {
 }
 
 export interface ParamsPlayerMusic {
-  isPlay:boolean,
   isRandom:boolean,
-  isLoop:boolean
+  isLoop:boolean,
+  currentVolume:number
 }

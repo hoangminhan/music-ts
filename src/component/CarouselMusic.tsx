@@ -7,7 +7,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Popover, Tooltip } from "antd";
 import React from "react";
-import { Autoplay, EffectCoverflow, Navigation, Pagination } from "swiper";
+import { Autoplay, Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { MusicProperties } from "types/music.types";
 import { handleFormatNumber } from "utils";
@@ -50,11 +50,16 @@ interface CarouselMusicProps {
 }
 export function CarouselMusic(props: CarouselMusicProps) {
   const { dataCarousel, title } = props;
-  const { setCurrentPlayer } = React.useContext(ContextApp);
+  const { setCurrentPlayer, setListPlay, setIsPlaying } = React.useContext(
+    ContextApp
+  );
 
   const handlePlayerMusic = (carousel: MusicProperties) => {
     sessionStorage.setItem("currentPlayer", JSON.stringify(carousel));
+    sessionStorage.setItem("currentPlayList", JSON.stringify(dataCarousel));
     setCurrentPlayer(carousel);
+    setListPlay(dataCarousel);
+    setIsPlaying(true);
   };
   return (
     <div className="mt-10">
@@ -63,8 +68,6 @@ export function CarouselMusic(props: CarouselMusicProps) {
         spaceBetween={24}
         slidesPerView={6.2}
         loop={true}
-        // centeredSlides={true}
-
         navigation={false}
         modules={[Pagination, Navigation]}
         breakpoints={{
@@ -89,7 +92,6 @@ export function CarouselMusic(props: CarouselMusicProps) {
             spaceBetween: 24,
           },
         }}
-        // className="mySwiper"
       >
         {dataCarousel.map((carousel, index) => {
           return (
@@ -126,10 +128,8 @@ export function CarouselMusic(props: CarouselMusicProps) {
                   <div className="w-[20px] h-[20px] cursor-pointer hover:scale-110 duration-150 ease-linear">
                     <Popover
                       content={ContentPopover}
-                      // trigger="click"
                       overlayClassName="popover-music-ts"
                     >
-                      {/* <Button type="primary">Hover me</Button> */}
                       <FontAwesomeIcon
                         icon={faEllipsis}
                         className="w-[20px] h-[20px]"

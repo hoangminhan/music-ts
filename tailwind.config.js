@@ -10,6 +10,7 @@ module.exports = {
         bgModal: "var(--background-modal)",
         bgButtonPrimary: "var(--bg-button-primary)",
         bgPlayer: "var(--bg-player)",
+        bgHoverDrawer: "var(--bg-hover-drawer)",
 
         sidebarText: "var(--text-sidebar)",
         primaryText: "var(--text-primary)",

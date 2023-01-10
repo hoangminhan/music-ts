@@ -7,9 +7,9 @@ export interface ParamsUrl {
 }
 
 export interface PaginationList {
-  _limit:number,
-  _page:number,
-  _total:number,
+  _limit?:number,
+  _page?:number,
+  _total?:number,
 }
 export interface ResponseList <T>{
   data: T[],

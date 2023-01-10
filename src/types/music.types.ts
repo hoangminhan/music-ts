@@ -25,7 +25,7 @@ export interface MusicProperties {
 }
 
 export interface ParamsUrlMusic {
-  typeMusic:string,
+  typeMusic?:string,
   params:ParamsUrl
 }
 

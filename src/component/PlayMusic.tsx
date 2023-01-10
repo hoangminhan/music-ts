@@ -234,7 +234,7 @@ export function PlayMusic(props: IPlayMusicProps) {
                     }}
                   >
                     {/* play */}
-                    {isPlaying ? <BsFillPlayFill /> : <BsPause />}
+                    {!isPlaying ? <BsFillPlayFill /> : <BsPause />}
                   </p>
 
                   <p

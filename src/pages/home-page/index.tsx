@@ -1,16 +1,36 @@
-import { CarouselMusic, Header, Hero } from "component";
+import { CarouselMusic, Header, Hero, MusicType } from "component";
 import { useHomePage } from "hooks";
 import { useEffect } from "react";
 
 export interface IHomePageProps {}
 
 export default function HomePage(props: IHomePageProps) {
-  const { handleGetListTrendingMusic, listMusic } = useHomePage();
+  const {
+    handleGetListTrendingMusic,
+    handleGetNewMusic,
+    handleGetListFavortitesMusic,
+    handleGetListTopViewMusic,
+    listMusic,
+    newMusics,
+    listFavorites,
+    listTopView,
+  } = useHomePage();
   useEffect(() => {
-    handleGetListTrendingMusic({
-      typeMusic: "trending",
-      params: { _limit: 30 },
-    });
+    Promise.all([
+      handleGetListTrendingMusic({
+        typeMusic: "trending",
+        params: { _limit: 30 },
+      }),
+      handleGetNewMusic({ _limit: 20 }),
+      handleGetListFavortitesMusic({
+        typeMusic: "favorite",
+        params: { _limit: 30 },
+      }),
+      handleGetListTopViewMusic({
+        typeMusic: "top-views",
+        params: { _type: "million" },
+      }),
+    ]);
   }, []);
   return (
     <>
@@ -20,7 +40,18 @@ export default function HomePage(props: IHomePageProps) {
       {/* trending */}
       <div>
         <CarouselMusic title="Trending" dataCarousel={listMusic} />
-        {/* <CarouselMusic title="Trending" dataCarousel={listMusic} /> */}
+      </div>
+      {/* new music */}
+      <div>
+        <MusicType title="Mới phát hành" newMusics={newMusics.data} />
+      </div>
+      {/* list favorite */}
+      <div>
+        <CarouselMusic title="Top yêu thích" dataCarousel={listFavorites} />
+      </div>
+      {/* new music */}
+      <div className="mb-[120px]">
+        <MusicType title="Top view" newMusics={listTopView} />
       </div>
     </>
   );

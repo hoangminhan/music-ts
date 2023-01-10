@@ -2,6 +2,7 @@ import {
   faEllipsis,
   faEye,
   faHeart,
+  faPause,
   faPlay,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -16,6 +17,7 @@ import { BsDownload } from "react-icons/bs";
 import { AiOutlinePlaySquare } from "react-icons/ai";
 import { MdOutlineLibraryAdd } from "react-icons/md";
 import { ContextApp } from "context";
+import { useHomePage } from "hooks";
 
 // content popover
 const ContentPopover: any = (
@@ -50,17 +52,16 @@ interface CarouselMusicProps {
 }
 export function CarouselMusic(props: CarouselMusicProps) {
   const { dataCarousel, title } = props;
-  const { setCurrentPlayer, setListPlay, setIsPlaying } = React.useContext(
-    ContextApp
-  );
+  const { isPlaying, currentPlayer } = React.useContext(ContextApp);
+  const { handleChangePlayMusic } = useHomePage();
 
-  const handlePlayerMusic = (carousel: MusicProperties) => {
-    sessionStorage.setItem("currentPlayer", JSON.stringify(carousel));
-    sessionStorage.setItem("currentPlayList", JSON.stringify(dataCarousel));
-    setCurrentPlayer(carousel);
-    setListPlay(dataCarousel);
-    setIsPlaying(true);
-  };
+  // const handlePlayerMusic = (carousel: MusicProperties) => {
+  //   sessionStorage.setItem("currentPlayer", JSON.stringify(carousel));
+  //   sessionStorage.setItem("currentPlayList", JSON.stringify(dataCarousel));
+  //   setCurrentPlayer(carousel);
+  //   setListPlay(dataCarousel);
+  //   setIsPlaying(true);
+  // };
   return (
     <div className="mt-10">
       <h3 className="mb-3 uppercase text-[20px] text-primaryText">{title}</h3>
@@ -117,10 +118,16 @@ export function CarouselMusic(props: CarouselMusicProps) {
                   {/* play */}
                   <div
                     className="w-[50px] h-[50px] bg-transparent rounded-full border-[1px] border-solid border-[#fff] flex-center-element cursor-pointer"
-                    onClick={() => handlePlayerMusic(carousel)}
+                    onClick={() =>
+                      handleChangePlayMusic(carousel, dataCarousel, isPlaying)
+                    }
                   >
                     <FontAwesomeIcon
-                      icon={faPlay}
+                      icon={
+                        currentPlayer?._id === carousel._id && isPlaying
+                          ? faPause
+                          : faPlay
+                      }
                       className="w-[20px] h-[20px]"
                     />
                   </div>

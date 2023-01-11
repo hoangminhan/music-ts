@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from "react";
-import { AppContextInterface } from "types";
+import { AppContextInterface, PropertiesModal, UserInformation } from "types";
 import { MusicProperties } from "types/music.types";
 interface propsContext {
   children: React.ReactElement;
@@ -14,6 +14,8 @@ export const ContextApp = createContext<AppContextInterface>({
   setCurrentPlayer: function (value: MusicProperties): void {},
   setListPlay: function (value: MusicProperties[]): void {},
   setIsPlaying: function (value: boolean): void {},
+  setPropsModal: function (value: PropertiesModal): void {},
+  setUserInfo: function (value: UserInformation | undefined): void {},
 });
 
 export const UseContextProvider = ({ children }: propsContext) => {
@@ -21,10 +23,13 @@ export const UseContextProvider = ({ children }: propsContext) => {
     sessionStorage.getItem("currentTheme") || "Light"
   );
   const [currentModal, setCurrentModal] = useState<string>("");
+  const [propsModal, setPropsModal] = useState<{}>();
   const [currentPlayer, setCurrentPlayer] = useState<MusicProperties>();
   // danh sach phat
   const [listPlay, setListPlay] = useState<MusicProperties[]>();
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
+
+  const [userInfo, setUserInfo] = useState<UserInformation>();
   // add currentPlayer to session storage
   useEffect(() => {
     const carousel = sessionStorage.getItem("currentPlayer");
@@ -34,6 +39,12 @@ export const UseContextProvider = ({ children }: propsContext) => {
     }
     if (carouselList) {
       setListPlay(JSON.parse(carouselList));
+    }
+  }, []);
+  useEffect(() => {
+    const user = localStorage.getItem("userInfo");
+    if (user) {
+      setUserInfo(JSON.parse(user));
     }
   }, []);
 
@@ -56,6 +67,10 @@ export const UseContextProvider = ({ children }: propsContext) => {
         setListPlay,
         isPlaying,
         setIsPlaying,
+        propsModal,
+        setPropsModal,
+        userInfo,
+        setUserInfo,
       }}
     >
       {children}

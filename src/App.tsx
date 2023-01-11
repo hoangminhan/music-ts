@@ -11,8 +11,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/effect-coverflow";
 import ModalApp from "modals";
-import { collection, getDocs } from "firebase/firestore";
-import { dbApp } from "./Firebase";
+import { initializeApp } from "firebase/app";
 
 const LoginPage = lazy(() => import("auth/pages/LoginPage"));
 const NotFoundPage = lazy(() => import("pages/not-found"));
@@ -43,16 +42,15 @@ const routes = [
 
 function App() {
   let mainContent = useRoutes(routes);
-  React.useEffect(() => {
-    const getData = async () => {
-      const querySnapshot = await getDocs(collection(dbApp, "favorites"));
-      querySnapshot.forEach((doc) => {
-        console.log(doc.data());
-        console.log(`${doc.id} => ${doc.data()}`);
-      });
-    };
-    getData();
-  }, []);
+  initializeApp({
+    apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+    authDomain: "music-ts-78b70.firebaseapp.com",
+    projectId: "music-ts-78b70",
+    storageBucket: "music-ts-78b70.appspot.com",
+    messagingSenderId: "1024484832025",
+    appId: "1:1024484832025:web:58785cc9ff85bbd7ad4b88",
+    measurementId: "G-KB1PH2XKNW",
+  });
 
   return (
     <>

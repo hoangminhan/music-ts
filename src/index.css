@@ -274,6 +274,10 @@
   background-color: var(--background-modal) !important;
 }
 
+:where(.css-dev-only-do-not-override-9ntgx0).ant-btn-primary:not(:disabled):hover {
+  background-color: var(--bg-button-primary) !important;
+}
+
 @layer components {
   .trasition-common {
     @apply transition-all duration-150 ease-linear;

@@ -1,3 +1,4 @@
+import {  ReactNode } from 'react';
 export interface ParamsUrl {
   _limit?:number,
   _page?:string,
@@ -14,5 +15,16 @@ export interface PaginationList {
 export interface ResponseList <T>{
   data: T[],
   pagination:PaginationList
+}
+export interface PropertiesModal {
+  width?:number,
+  title?:ReactNode,
+  closable?:boolean
+}
+export interface UserInformation {
+  displayName:string,
+  email:string
+  photoURL:string
+  user_uid:string,
 }
 

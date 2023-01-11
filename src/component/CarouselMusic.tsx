@@ -7,7 +7,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Popover, Tooltip } from "antd";
-import React from "react";
+import React, { useState } from "react";
 import { Autoplay, Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { MusicProperties } from "types/music.types";
@@ -17,7 +17,9 @@ import { BsDownload } from "react-icons/bs";
 import { AiOutlinePlaySquare } from "react-icons/ai";
 import { MdOutlineLibraryAdd } from "react-icons/md";
 import { ContextApp } from "context";
-import { useHomePage } from "hooks";
+import { useFirebase, useHomePage } from "hooks";
+import { collection, doc, onSnapshot } from "firebase/firestore";
+import { dbApp } from "FirebaseMusic";
 
 // content popover
 const ContentPopover: any = (
@@ -52,8 +54,9 @@ interface CarouselMusicProps {
 }
 export function CarouselMusic(props: CarouselMusicProps) {
   const { dataCarousel, title } = props;
-  const { isPlaying, currentPlayer } = React.useContext(ContextApp);
+  const { isPlaying, currentPlayer, userInfo } = React.useContext(ContextApp);
   const { handleChangePlayMusic } = useHomePage();
+  const { handleAddToFavoriteList, handleCheckFavorited } = useFirebase();
 
   // const handlePlayerMusic = (carousel: MusicProperties) => {
   //   sessionStorage.setItem("currentPlayer", JSON.stringify(carousel));
@@ -62,6 +65,20 @@ export function CarouselMusic(props: CarouselMusicProps) {
   //   setListPlay(dataCarousel);
   //   setIsPlaying(true);
   // };
+  const [listFavorited, setListFavorited] = useState<
+    MusicProperties[] | undefined
+  >();
+  React.useEffect(() => {
+    if (userInfo) {
+      const docRef = doc(dbApp, "users", userInfo?.user_uid);
+      onSnapshot(docRef, (listUser) => {
+        if (!listUser.data()?.length) {
+          setListFavorited(listUser?.data()?.favorites);
+          console.log(listUser.data());
+        }
+      });
+    }
+  }, [userInfo]);
   return (
     <div className="mt-10">
       <h3 className="mb-3 uppercase text-[20px] text-primaryText">{title}</h3>
@@ -111,7 +128,21 @@ export function CarouselMusic(props: CarouselMusicProps) {
                     <Tooltip title="Thêm vào thư viện">
                       <FontAwesomeIcon
                         icon={faHeart}
-                        className="w-[20px] h-[20px] hover:text-[#b72479]"
+                        className={`w-[20px] h-[20px] hover:text-[#b72479] ${
+                          handleCheckFavorited(listFavorited, carousel)
+                            ? "text-[#b72479]"
+                            : ""
+                        }`}
+                        onClick={() => {
+                          if (userInfo) {
+                            handleAddToFavoriteList(
+                              "users",
+                              userInfo,
+                              "favorites",
+                              carousel
+                            );
+                          }
+                        }}
                       />
                     </Tooltip>
                   </div>

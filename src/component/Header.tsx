@@ -7,8 +7,9 @@ import {
   faUpload,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Popover, Tooltip } from "antd";
+import { message, Popover, Tooltip } from "antd";
 import { ContextApp } from "context";
+import { getAuth, signOut } from "firebase/auth";
 import { useContext } from "react";
 import { FcVip } from "react-icons/fc";
 import { MdLogout } from "react-icons/md";
@@ -32,15 +33,38 @@ export function Header(props: HeaderProps) {
           Mua code VIP
         </p>
       </div>
-      <div className="group text-sidebarText flex gap-x-2 items-center py-2 px-3 hover:bg-[#0000000d] cursor-pointer hover:text-hoverItem">
+      <div
+        className="group text-sidebarText flex gap-x-2 items-center py-2 px-3 hover:bg-[#0000000d] cursor-pointer hover:text-hoverItem"
+        onClick={() => {
+          const auth = getAuth();
+          signOut(auth)
+            .then(() => {
+              localStorage.removeItem("accessToken");
+              localStorage.removeItem("userInfo");
+              setUserInfo(undefined);
+              message.success("Đăng xuất thành công");
+            })
+            .catch((error) => {
+              message.error("Có lỗi xảy ra");
+            });
+        }}
+      >
         <MdLogout />
         <p className="group-hover:text-hoverItem text-sidebarText">Đăng xuất</p>
       </div>
     </div>
   );
-
-  const { currentModal, setCurrentModal } = useContext(ContextApp);
+  const {
+    setCurrentModal,
+    setPropsModal,
+    propsModal,
+    userInfo,
+    setUserInfo,
+  } = useContext(ContextApp);
   const { handleToggleMenu } = props;
+  console.log({ userInfo });
+
+  const accessToken: string = localStorage.getItem("accessToken") || "";
 
   return (
     <div className="duration-150 transition-all padding-project h-[70px] fixed z-10 bg-bgPrimary left-0 lg:left-[240px] right-0 flex items-center justify-between border-solid border-b-[1px] border-borderLight">
@@ -75,37 +99,59 @@ export function Header(props: HeaderProps) {
             className="style-icon-header"
             onClick={() => {
               setCurrentModal("modal_layout");
+              // setPropsModal({
+              //   ...propsModal,
+              //   title: (
+              //     <h2 className="text-[24px] text-primaryText">Giao Diện</h2>
+              //   ),
+              // });
             }}
           >
             <FontAwesomeIcon icon={faShirt} className="text-secondText" />
           </div>
         </Tooltip>
-
         {/* upload */}
         <Tooltip title="Tải lên">
           <div className="style-icon-header ml-[12px]">
             <FontAwesomeIcon icon={faUpload} className="text-secondText" />
           </div>
         </Tooltip>
-
         {/* setting */}
         <Tooltip title="Cài đặt">
           <div className="style-icon-header ml-[12px]">
             <FontAwesomeIcon icon={faGear} className="text-secondText" />
           </div>
         </Tooltip>
-
         {/* profile */}
-        <Popover
-          content={ContentProfile}
-          trigger="click"
-          placement="bottomRight"
-          overlayClassName="popover-music-ts"
-        >
-          <div className="style-icon-header ml-[12px]">
+        {accessToken ? (
+          <Popover
+            content={ContentProfile}
+            trigger="click"
+            placement="bottomRight"
+            overlayClassName="popover-music-ts"
+          >
+            <div className="style-icon-header ml-[12px]">
+              {userInfo?.photoURL ? (
+                <img src={userInfo?.photoURL} alt="" className="rounded-full" />
+              ) : (
+                <FontAwesomeIcon
+                  icon={faCircleUser}
+                  className="text-secondText"
+                />
+              )}
+            </div>
+          </Popover>
+        ) : (
+          <div
+            className="style-icon-header ml-[12px]"
+            onClick={() => {
+              setCurrentModal("modal_auth");
+              setPropsModal({ ...propsModal, width: 500, closable: false });
+            }}
+          >
             <FontAwesomeIcon icon={faCircleUser} className="text-secondText" />
           </div>
-        </Popover>
+        )}
       </div>
     </div>
   );

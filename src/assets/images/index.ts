@@ -1,4 +1,5 @@
 import logo from "./logo.svg";
+import logoGoogle from "./logo-google.svg";
 import darkTheme from "./dark.jpg";
 import violetTheme from "./purple.jpg";
 import darkBlueTheme from "./darkBlue.jpg";
@@ -15,6 +16,7 @@ import pinkLightTheme from "./pink-light.jpg";
 
 export const imgSource = {
   logo,
+  logoGoogle,
   darkTheme,
   violetTheme,
   darkBlueTheme,

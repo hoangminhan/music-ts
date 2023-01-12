@@ -1,13 +1,13 @@
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import {
-  faCloud,
   faCloudArrowUp,
   faHouse,
   faMusic,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { ContextApp } from "context";
 import * as React from "react";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { MenuSidebar } from "types/menu.types";
 const menus: MenuSidebar[] = [
   {
@@ -18,12 +18,12 @@ const menus: MenuSidebar[] = [
   {
     title: "Đã yêu thích",
     icon: faHeart,
-    path: "/demo",
+    path: "/favorites",
   },
   {
     title: "Bài hát đã nghe",
     icon: faMusic,
-    path: "/demo1",
+    path: "/listened",
   },
   {
     title: "Đã tải lên",
@@ -39,6 +39,19 @@ export function Menu(props: MenuProps) {
   // <FontAwesomeIcon icon="fa-regular fa-house" /> ffffff1a
   const location = useLocation();
   const { pathname } = location;
+  const accessToken = localStorage.getItem("accessToken") || "";
+  const navigate = useNavigate();
+  const { setCurrentModal, setPropsModal, propsModal } = React.useContext(
+    ContextApp
+  );
+  const handleNagivation = (path: string) => {
+    if (accessToken || path === "/") {
+      navigate(path);
+    } else {
+      setCurrentModal("modal_auth");
+      setPropsModal({ ...propsModal, width: 500, closable: false });
+    }
+  };
   return (
     <nav className="flex-1">
       <ul>
@@ -52,24 +65,29 @@ export function Menu(props: MenuProps) {
                   : ""
               }`}
             >
-              <Link to={menu.path}>
-                <div className="flex px-[25px] py-3 text-sidebarText">
-                  {" "}
-                  <FontAwesomeIcon
-                    icon={menu.icon}
-                    className={`group-hover:text-hoverItem text-[14px] ${
-                      pathname === menu.path ? "text-hoverItem" : ""
-                    }`}
-                  />
-                  <p
-                    className={`flex-1 ml-2 text-[14px] group-hover:text-hoverItem font-[700] text-sidebarText ${
-                      pathname === menu.path ? "text-hoverItem" : ""
-                    }`}
-                  >
-                    {menu.title}
-                  </p>
-                </div>
-              </Link>
+              {/* <Link to={menu.path}> */}
+              <div
+                className="flex px-[25px] py-3 text-sidebarText cursor-pointer"
+                onClick={() => {
+                  handleNagivation(menu.path);
+                }}
+              >
+                {" "}
+                <FontAwesomeIcon
+                  icon={menu.icon}
+                  className={`group-hover:text-hoverItem text-[14px] ${
+                    pathname === menu.path ? "text-hoverItem" : ""
+                  }`}
+                />
+                <p
+                  className={`flex-1 ml-2 text-[14px] group-hover:text-hoverItem font-[700] text-sidebarText ${
+                    pathname === menu.path ? "text-hoverItem" : ""
+                  }`}
+                >
+                  {menu.title}
+                </p>
+              </div>
+              {/* </Link> */}
             </li>
           );
         })}
@@ -94,60 +112,4 @@ export function Menu(props: MenuProps) {
       </div>
     </nav>
   );
-
-  //   <ul className="flex-1">
-  //     <li
-  //       className={`group ${
-  //         pathname === "/"
-  //           ? "bg-[#ffffff1a] border-l-[3px] border-solid border-[#3b68ef]"
-  //           : ""
-  //       }`}
-  //     >
-  //       <Link to="/">
-  //         <div className="flex px-[25px] py-2">
-  //           {" "}
-  //           <FontAwesomeIcon
-  //             icon={faHouse}
-  //             className={`group-hover:text-white ${
-  //               pathname === "/" ? "text-white" : ""
-  //             }`}
-  //           />
-  //           <p
-  //             className={`flex-1 ml-2 group-hover:text-white ${
-  //               pathname === "/" ? "text-white" : ""
-  //             }`}
-  //           >
-  //             Home Page
-  //           </p>
-  //         </div>
-  //       </Link>
-  //     </li>
-
-  //     <li
-  //       className={`group ${
-  //         pathname === "/demo"
-  //           ? "bg-[#ffffff1a] border-l-[3px] border-solid border-[#3b68ef]"
-  //           : ""
-  //       }`}
-  //     >
-  //       <Link to="/demo">
-  //         <div className="flex px-[25px] py-2">
-  //           <FontAwesomeIcon
-  //             icon={faHeart}
-  //             className={`group-hover:text-white ${
-  //               pathname === "/demo" ? "text-white" : ""
-  //             }`}
-  //           />
-  //           <p
-  //             className={`flex-1 ml-2 group-hover:text-white ${
-  //               pathname === "/demo" ? "text-white" : ""
-  //             }`}
-  //           >
-  //             Đã yêu thích
-  //           </p>
-  //         </div>
-  //       </Link>
-  //     </li>
-  //   </ul>
-  // );
 }

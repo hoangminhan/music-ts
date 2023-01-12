@@ -4,11 +4,13 @@ import { ContextApp } from "context";
 import { getListFavoritesThunk, getListMusicAsyncThunk,getListTopViewThunk,getNewMusicThunk } from "features/home-page";
 import { ParamsUrl } from "types";
 import { MusicProperties, ParamsUrlMusic } from "types/music.types";
+import { useFirebase } from "./use-firebase";
 
 export const useHomePage = ()=>{
-   const { setCurrentPlayer, setListPlay, setIsPlaying ,currentPlayer} = React.useContext(
+   const { setCurrentPlayer, setListPlay, setIsPlaying ,currentPlayer,userInfo} = React.useContext(
     ContextApp
   );
+  const {handleAddToListFirebase}=useFirebase()
   const dataHomePage = useAppSelector(state=>state.homePageStore)
   const {listMusic,isLoadingHomePage,pagination,newMusics,listFavorites,listTopView} = dataHomePage
   const dispatch = useAppDispatch();
@@ -49,7 +51,7 @@ export const useHomePage = ()=>{
   }
 
   // get current song playing
-  const handleChangePlayMusic = (carousel: MusicProperties,dataCarousel:MusicProperties[],isPlaying:boolean)=>{
+  const handleChangePlayMusic = async(carousel: MusicProperties,dataCarousel:MusicProperties[],isPlaying:boolean)=>{
    
 
     if(isPlaying && currentPlayer?._id===carousel._id){
@@ -61,6 +63,9 @@ export const useHomePage = ()=>{
       setCurrentPlayer(carousel);
       setListPlay(dataCarousel);
       setIsPlaying(true);
+      if(userInfo){
+      await handleAddToListFirebase("users",userInfo,"listenRecent",carousel,"add")
+      }
     }
     
   }

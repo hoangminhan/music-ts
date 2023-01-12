@@ -17,6 +17,10 @@ export interface AppContextInterface {
   setPropsModal: (props: PropertiesModal) => void;
   userInfo?:UserInformation
   setUserInfo: (props: UserInformation | undefined) => void;
+  listFavorited?:MusicProperties[]
+  setListFavorited: (props: MusicProperties[]) => void;
+  listReccent?:MusicProperties[]
+  setListReccent: (props: MusicProperties[]) => void;
 
 
   

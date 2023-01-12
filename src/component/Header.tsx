@@ -13,6 +13,7 @@ import { getAuth, signOut } from "firebase/auth";
 import { useContext } from "react";
 import { FcVip } from "react-icons/fc";
 import { MdLogout } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
 export interface HeaderProps {
   handleToggleMenu: () => void;
@@ -42,6 +43,7 @@ export function Header(props: HeaderProps) {
               localStorage.removeItem("accessToken");
               localStorage.removeItem("userInfo");
               setUserInfo(undefined);
+              navigate("/");
               message.success("Đăng xuất thành công");
             })
             .catch((error) => {
@@ -62,7 +64,7 @@ export function Header(props: HeaderProps) {
     setUserInfo,
   } = useContext(ContextApp);
   const { handleToggleMenu } = props;
-  console.log({ userInfo });
+  const navigate = useNavigate();
 
   const accessToken: string = localStorage.getItem("accessToken") || "";
 

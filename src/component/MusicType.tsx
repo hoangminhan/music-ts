@@ -41,8 +41,8 @@ export function MusicType(props: IMusicTypeProps) {
                 {/* image */}
                 <div
                   className="w-[48px] h-[48px] relative cursor-pointer"
-                  onClick={() =>
-                    handleChangePlayMusic(music, newMusics, isPlaying)
+                  onClick={async () =>
+                    await handleChangePlayMusic(music, newMusics, isPlaying)
                   }
                 >
                   <img

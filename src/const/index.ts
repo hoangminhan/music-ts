@@ -12,7 +12,8 @@ export const bannerDefault = [
 export const nameModal = {
   MODAL_LAYOUT: "modal_layout",
   MODAL_AUTH: "modal_auth",
-  MODAL_MV:"modal_mv"
+  MODAL_MV:"modal_mv",
+  MODAL_UPLOAD:"modal_upload"
 };
 export const DARK_THEME_APP = {
   Dark: "Dark",

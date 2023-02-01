@@ -20,8 +20,6 @@ import ReactPlayer from "react-player";
 import { MusicProperties, ParamsPlayerMusic } from "types/music.types";
 import { DrawerSong } from "./DrawerSong";
 import { useCommon, useFirebase } from "hooks";
-import axios from "axios";
-import fileDownload from "js-file-download";
 export interface IPlayMusicProps {}
 const formatTime = (seconds: number) => {
   const minutes = Math.floor((seconds % 3600) / 60);

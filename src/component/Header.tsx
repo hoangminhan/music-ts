@@ -114,7 +114,13 @@ export function Header(props: HeaderProps) {
         </Tooltip>
         {/* upload */}
         <Tooltip placement="bottom" title="Tải lên">
-          <div className="style-icon-header ml-[12px]">
+          <div
+            className="style-icon-header ml-[12px]"
+            onClick={() => {
+              setCurrentModal("modal_upload");
+              setPropsModal({ width: 500, centered: false });
+            }}
+          >
             <FontAwesomeIcon icon={faUpload} className="text-secondText" />
           </div>
         </Tooltip>

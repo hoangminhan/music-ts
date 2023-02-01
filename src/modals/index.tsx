@@ -4,7 +4,7 @@ import { ModalLayout } from "layout";
 import { ContextApp } from "context";
 import { Modal } from "antd";
 import { ModalAuth } from "auth";
-import { ModalWathcMv } from "component";
+import { ModalUploadSong, ModalWathcMv } from "component";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -20,6 +20,8 @@ const handleGetCurrentModal = (type: string) => {
       return ModalAuth;
     case nameModal.MODAL_MV:
       return ModalWathcMv;
+    case nameModal.MODAL_UPLOAD:
+      return ModalUploadSong;
     default:
       return null;
   }
@@ -46,11 +48,11 @@ export default function ModalApp(props: ModalAppProps) {
       open={true}
       footer={null}
       width={900}
-      // closeIcon={
-      //   <div className="w-10 h-10 mr-2 rounded-full flex items-center justify-center bg-hoverBgItem">
-      //     <FontAwesomeIcon icon={faClose} />
-      //   </div>
-      // }
+      closeIcon={
+        <div className="w-10 h-10 rounded-full flex items-center justify-center bg-hoverBgItem">
+          <FontAwesomeIcon icon={faClose} />
+        </div>
+      }
       onCancel={() => {
         setCurrentModal("");
         setPropsModal({});

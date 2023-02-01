@@ -21,7 +21,7 @@ export interface HeaderProps {
 
 export function Header(props: HeaderProps) {
   const ContentProfile = (
-    <div className="w-[200px] -m-3 py-3">
+    <div className="w-[200px] -m-3 p-3">
       <div className="group text-sidebarText flex gap-x-2 items-center py-2 px-3 hover:bg-[#0000000d] cursor-pointer hover:text-hoverItem">
         <FcVip />
         <p className="group-hover:text-hoverItem text-sidebarText">
@@ -69,7 +69,7 @@ export function Header(props: HeaderProps) {
   const accessToken: string = localStorage.getItem("accessToken") || "";
 
   return (
-    <div className="duration-150 transition-all padding-project h-[70px] fixed z-10 bg-bgPrimary left-0 lg:left-[240px] right-0 flex items-center justify-between border-solid border-b-[1px] border-borderLight">
+    <div className="duration-150 transition-all padding-project h-[70px] fixed z-10 bg-bgPrimary left-0 lg:left-[240px] right-0 flex items-center justify-between">
       {/* menu mobile */}
       <div className="mr-2 block lg:hidden">
         <FontAwesomeIcon
@@ -96,7 +96,7 @@ export function Header(props: HeaderProps) {
       {/* action */}
       <div className="flex">
         {/* topic */}
-        <Tooltip title="Chủ đề">
+        <Tooltip placement="bottom" title="Chủ đề">
           <div
             className="style-icon-header"
             onClick={() => {
@@ -113,13 +113,13 @@ export function Header(props: HeaderProps) {
           </div>
         </Tooltip>
         {/* upload */}
-        <Tooltip title="Tải lên">
+        <Tooltip placement="bottom" title="Tải lên">
           <div className="style-icon-header ml-[12px]">
             <FontAwesomeIcon icon={faUpload} className="text-secondText" />
           </div>
         </Tooltip>
         {/* setting */}
-        <Tooltip title="Cài đặt">
+        <Tooltip placement="bottom" title="Cài đặt">
           <div className="style-icon-header ml-[12px]">
             <FontAwesomeIcon icon={faGear} className="text-secondText" />
           </div>

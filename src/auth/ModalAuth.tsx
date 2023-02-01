@@ -60,6 +60,8 @@ export function ModalAuth(props: IModalAuthProps) {
 
   // register
   const handleRegisterAccount = async (dataRegister: any) => {
+    setIsLoading(true);
+
     const { fullName, password, username } = dataRegister;
 
     const auth = getAuth();
@@ -77,7 +79,6 @@ export function ModalAuth(props: IModalAuthProps) {
         photoURL: user.photoURL ? user.photoURL : "",
         user_uid: user.uid,
       };
-      setIsLoading(true);
 
       await handleAddDoc(dbApp, "users", userRegister);
       setIsLoading(false);

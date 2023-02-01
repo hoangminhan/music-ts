@@ -10,7 +10,7 @@ export function CarouselMusic(props: CarouselMusicProps) {
   const { dataCarousel, title } = props;
 
   return (
-    <div className="mt-10">
+    <div>
       <h3 className="mb-3 uppercase text-[20px] text-primaryText">{title}</h3>
 
       <Song listSong={dataCarousel} type="home" />

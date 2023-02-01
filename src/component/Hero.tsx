@@ -7,7 +7,7 @@ interface HeroProps {}
 export function Hero(props: HeroProps) {
   return (
     <Swiper
-      className="mt-10"
+      className="rounded-lg"
       spaceBetween={30}
       slidesPerView={2}
       // effect={"coverflow"}

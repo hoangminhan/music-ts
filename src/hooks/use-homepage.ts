@@ -52,8 +52,6 @@ export const useHomePage = ()=>{
 
   // get current song playing
   const handleChangePlayMusic = async(carousel: MusicProperties,dataCarousel:MusicProperties[],isPlaying:boolean)=>{
-   
-
     if(isPlaying && currentPlayer?._id===carousel._id){
       setIsPlaying(false);
     }

@@ -20,6 +20,8 @@ export interface PropertiesModal {
   width?:number,
   title?:ReactNode,
   closable?:boolean
+  [key:string]:any
+
 }
 export interface UserInformation {
   displayName:string,

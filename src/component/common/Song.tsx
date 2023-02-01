@@ -9,7 +9,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Popover, Tooltip } from "antd";
 import { ContextApp } from "context";
-import { useFirebase, useHomePage } from "hooks";
+import { useCommon, useFirebase, useHomePage } from "hooks";
 import { AiOutlinePlaySquare } from "react-icons/ai";
 import { BsDownload } from "react-icons/bs";
 import { MdOutlineLibraryAdd } from "react-icons/md";
@@ -24,6 +24,7 @@ export interface ISongProps {
 }
 
 export function Song(props: ISongProps) {
+  const { downloadSong } = useCommon();
   const ContentPopover: any = (
     <div>
       {/* playlist */}
@@ -50,12 +51,29 @@ export function Song(props: ISongProps) {
     </div>
   );
   const { listSong, type } = props;
-  const { listFavorited, isPlaying, currentPlayer } = React.useContext(
-    ContextApp
-  );
+  const {
+    listFavorited,
+    isPlaying,
+    setIsPlaying,
+    currentPlayer,
+    setCurrentModal,
+    setDataModal,
+    setPropsModal,
+  } = React.useContext(ContextApp);
   const { handleChangePlayMusic } = useHomePage();
 
   const { handleCheckFavorited, handleClickHeart } = useFirebase();
+
+  const handleWatchMovie = (data: MusicProperties) => {
+    setIsPlaying(false);
+    setCurrentModal("modal_mv");
+
+    setDataModal(data);
+    setPropsModal({ width: 800 });
+
+    console.log(data);
+  };
+
   if (!listSong) return null;
   return (
     <>
@@ -97,7 +115,7 @@ export function Song(props: ISongProps) {
                     </div>
                     {/* play */}
                     <div
-                      className="w-[50px] h-[50px] bg-transparent rounded-full border-[1px] border-solid border-[#fff] flex-center-element cursor-pointer"
+                      className="w-[40px] h-[40px] bg-transparent rounded-full border-[1px] border-solid border-[#fff] flex-center-element cursor-pointer"
                       onClick={async () => {
                         await handleChangePlayMusic(song, listSong, isPlaying);
                       }}
@@ -114,7 +132,47 @@ export function Song(props: ISongProps) {
                     {/* extra action */}
                     <div className="w-[20px] h-[20px] cursor-pointer hover:scale-110 duration-150 ease-linear">
                       <Popover
-                        content={ContentPopover}
+                        content={
+                          <div>
+                            {/* playlist */}
+                            <div className="group flex items-center justify-start text-sidebarText cursor-pointer px-3 hover:bg-hoverBgItem">
+                              <p className="mr-2 group-hover:text-hoverItem text-sidebarText">
+                                <MdOutlineLibraryAdd />
+                              </p>
+                              <p className="group-hover:text-hoverItem text-sidebarText text-[14px]">
+                                Thêm vào danh sách phát
+                              </p>
+                            </div>
+                            {/* mv */}
+                            <div
+                              className="group flex items-center justify-start text-sidebarText cursor-pointer px-3 hover:bg-hoverBgItem"
+                              onClick={() => {
+                                handleWatchMovie(song);
+                              }}
+                            >
+                              <p className="mr-2 group-hover:text-hoverItem text-sidebarText">
+                                <AiOutlinePlaySquare />
+                              </p>
+                              <p className="group-hover:text-hoverItem text-sidebarText text-[14px]">
+                                Xem MV
+                              </p>
+                            </div>
+                            {/* download */}
+                            <div
+                              className="group flex items-center justify-start text-sidebarText cursor-pointer px-3 hover:bg-hoverBgItem"
+                              onClick={() => {
+                                downloadSong(song.src_music, song.name_music);
+                              }}
+                            >
+                              <p className="mr-2 group-hover:text-hoverItem text-sidebarText">
+                                <BsDownload />
+                              </p>
+                              <p className="group-hover:text-hoverItem text-sidebarText text-[14px]">
+                                Tải xuống
+                              </p>
+                            </div>
+                          </div>
+                        }
                         overlayClassName="popover-music-ts"
                       >
                         <FontAwesomeIcon
@@ -196,7 +254,7 @@ export function Song(props: ISongProps) {
               <SwiperSlide key={song._id} className="overflow-hidden">
                 <div className="group relative overflow-hidden">
                   <img
-                    className="rounded-t-lg group-hover:scale-105 hover:overflow-hidden duration-300 ease-linear cursor-pointer w-[200px] h-[200px]"
+                    className="rounded-t-lg group-hover:scale-105 group-hover:overflow-hidden duration-300 ease-linear cursor-pointer w-[200px] h-[180px]"
                     src={song.image_music}
                     alt=""
                   />
@@ -227,7 +285,7 @@ export function Song(props: ISongProps) {
                     </div>
                     {/* play */}
                     <div
-                      className="w-[50px] h-[50px] bg-transparent rounded-full border-[1px] border-solid border-[#fff] flex-center-element cursor-pointer"
+                      className="w-[40px] h-[40px] bg-transparent rounded-full border-[1px] border-solid border-[#fff] flex-center-element cursor-pointer"
                       onClick={async () => {
                         await handleChangePlayMusic(song, listSong, isPlaying);
                       }}
@@ -244,7 +302,48 @@ export function Song(props: ISongProps) {
                     {/* extra action */}
                     <div className="w-[20px] h-[20px] cursor-pointer hover:scale-110 duration-150 ease-linear">
                       <Popover
-                        content={ContentPopover}
+                        placement="topRight"
+                        content={
+                          <div>
+                            {/* playlist */}
+                            <div className="group flex items-center justify-start text-sidebarText cursor-pointer px-3 hover:bg-hoverBgItem">
+                              <p className="mr-2 group-hover:text-hoverItem text-sidebarText">
+                                <MdOutlineLibraryAdd />
+                              </p>
+                              <p className="group-hover:text-hoverItem text-sidebarText text-[14px]">
+                                Thêm vào danh sách phát
+                              </p>
+                            </div>
+                            {/* mv */}
+                            <div
+                              className="group flex items-center justify-start text-sidebarText cursor-pointer px-3 hover:bg-hoverBgItem"
+                              onClick={() => {
+                                handleWatchMovie(song);
+                              }}
+                            >
+                              <p className="mr-2 group-hover:text-hoverItem text-sidebarText">
+                                <AiOutlinePlaySquare />
+                              </p>
+                              <p className="group-hover:text-hoverItem text-sidebarText text-[14px]">
+                                Xem MV
+                              </p>
+                            </div>
+                            {/* download */}
+                            <div
+                              className="group flex items-center justify-start text-sidebarText cursor-pointer px-3 hover:bg-hoverBgItem"
+                              onClick={() => {
+                                downloadSong(song.src_music, song.name_music);
+                              }}
+                            >
+                              <p className="mr-2 group-hover:text-hoverItem text-sidebarText">
+                                <BsDownload />
+                              </p>
+                              <p className="group-hover:text-hoverItem text-sidebarText text-[14px]">
+                                Tải xuống
+                              </p>
+                            </div>
+                          </div>
+                        }
                         overlayClassName="popover-music-ts"
                       >
                         <FontAwesomeIcon
@@ -264,27 +363,33 @@ export function Song(props: ISongProps) {
                 </div>
 
                 {/* content */}
-                <div className="bg-[#21212a] h-[120px] px-2 py-3 flex flex-col rounded-b-lg">
-                  <Tooltip title={song.name_music}>
-                    <p className="text-white text-[15px] line-clamp-1 capitalize">
-                      {song.name_music}
-                    </p>
-                  </Tooltip>
-                  <p className="mt-2 text-[13px] text-[#1e78e1]">
-                    {song.name_singer}
-                  </p>
-                  <div className="mt-2">
-                    <FontAwesomeIcon icon={faEye} />
-                    <span className="ml-1 text-[13px]">
-                      {handleFormatNumber(song.view)} view
-                    </span>
-                  </div>
-                  <div className="mt-2">
-                    <FontAwesomeIcon icon={faHeart} />
-                    <span className="ml-1 text-[13px]">
-                      {handleFormatNumber(song?.favorite ? song?.favorite : 0)}{" "}
-                      song
-                    </span>
+                <div className="bg-[#21212a] h-[120px] px-2 py-3">
+                  <div className="flex flex-col rounded-b-lg">
+                    <Tooltip title={song.name_music}>
+                      <p className="text-white text-[15px] line-clamp-1 capitalize">
+                        {song.name_music}
+                      </p>
+                    </Tooltip>
+                    <Tooltip title={song.name_singer}>
+                      <p className="mt-2 text-[13px] text-[#1e78e1] line-clamp-1">
+                        {song.name_singer}
+                      </p>
+                    </Tooltip>
+                    <div className="mt-2">
+                      <FontAwesomeIcon className="text-[13px]" icon={faEye} />
+                      <span className="ml-1 text-[13px]">
+                        {handleFormatNumber(song.view)} view
+                      </span>
+                    </div>
+                    <div className="mt-2">
+                      <FontAwesomeIcon className="text-[13px]" icon={faHeart} />
+                      <span className="ml-1 text-[13px]">
+                        {handleFormatNumber(
+                          song?.favorite ? song?.favorite : 0
+                        )}{" "}
+                        song
+                      </span>
+                    </div>
                   </div>
                 </div>
               </SwiperSlide>

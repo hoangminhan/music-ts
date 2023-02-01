@@ -1,6 +1,3 @@
-import * as React from "react";
-import { useRouteError } from "react-router-dom";
-
 interface NotFoundPageProps {}
 
 export default function NotFoundPage(props: NotFoundPageProps) {

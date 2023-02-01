@@ -87,7 +87,7 @@ export function ModalLayout(props: ModalLayoutProps) {
         </div>
       </div>
       {/* Light color*/}
-      <div>
+      {/* <div>
         <p className="my-4 text-primaryText text-[18px]">Màu Sáng</p>
 
         <div className="flex flex-wrap gap-x-4 gap-y-6">
@@ -104,10 +104,8 @@ export function ModalLayout(props: ModalLayoutProps) {
                         : ""
                     }`}
                   />
-                  {/* opacity */}
                   <div className="absolute z-[1] inset-0 bg-[#00000080] invisible group-hover:visible opacity-60"></div>
 
-                  {/* button */}
                   <div className="invisible group-hover:visible trasition-common absolute z-[2] top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2">
                     <div
                       className="w-[100px]  mb-2 text-center py-[5px] rounded-full bg-bgButtonPrimary text-white cursor-pointer"
@@ -129,7 +127,6 @@ export function ModalLayout(props: ModalLayoutProps) {
                     </div>
                   </div>
 
-                  {/* check */}
                   {themeProject === theme.value && (
                     <div className="absolute right-2 bottom-2 w-[20px] h-[20px] bg-bgButtonPrimary rounded-full flex items-center justify-center">
                       <FontAwesomeIcon icon={faCheck} />
@@ -143,7 +140,7 @@ export function ModalLayout(props: ModalLayoutProps) {
             );
           })}
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

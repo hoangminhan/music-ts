@@ -17,9 +17,11 @@ import { RxTrackNext, RxTrackPrevious } from "react-icons/rx";
 import { FaRandom } from "react-icons/fa";
 import { MdOutlineLibraryAdd } from "react-icons/md";
 import ReactPlayer from "react-player";
-import { ParamsPlayerMusic } from "types/music.types";
+import { MusicProperties, ParamsPlayerMusic } from "types/music.types";
 import { DrawerSong } from "./DrawerSong";
-import { useFirebase } from "hooks";
+import { useCommon, useFirebase } from "hooks";
+import axios from "axios";
+import fileDownload from "js-file-download";
 export interface IPlayMusicProps {}
 const formatTime = (seconds: number) => {
   const minutes = Math.floor((seconds % 3600) / 60);
@@ -38,7 +40,11 @@ export function PlayMusic(props: IPlayMusicProps) {
     setIsPlaying,
     listFavorited,
     listReccent,
+    setCurrentModal,
+    setDataModal,
+    setPropsModal,
   } = useContext(ContextApp);
+  const { downloadSong } = useCommon();
   const [actionPlayer, setActionPlayer] = useState<ParamsPlayerMusic>({
     isLoop: false,
     isRandom: false,
@@ -129,6 +135,13 @@ export function PlayMusic(props: IPlayMusicProps) {
     }
   };
 
+  const handleWatchMovie = (data: MusicProperties) => {
+    setIsPlaying(false);
+    setCurrentModal("modal_mv");
+    setDataModal(data);
+    setPropsModal({ width: 800 });
+  };
+
   if (!currentPlayer) return null;
   return (
     <>
@@ -170,10 +183,53 @@ export function PlayMusic(props: IPlayMusicProps) {
                   }}
                 />
               </Tooltip>
-              <Tooltip title="Xem thêm">
+              <div>
                 <Popover
-                  content={ContentPopover}
-                  trigger="click"
+                  content={
+                    <div>
+                      {/* playlist */}
+                      <div className="group flex items-center justify-start text-sidebarText cursor-pointer px-3 hover:bg-hoverBgItem">
+                        <p className="mr-2 group-hover:text-hoverItem text-sidebarText">
+                          <MdOutlineLibraryAdd />
+                        </p>
+                        <p className="group-hover:text-hoverItem text-sidebarText text-[14px]">
+                          Thêm vào danh sách phát
+                        </p>
+                      </div>
+                      {/* mv */}
+                      <div
+                        className="group flex items-center justify-start text-sidebarText cursor-pointer px-3 hover:bg-hoverBgItem"
+                        onClick={() => {
+                          handleWatchMovie(currentPlayer);
+                        }}
+                      >
+                        <p className="mr-2 group-hover:text-hoverItem text-sidebarText">
+                          <AiOutlinePlaySquare />
+                        </p>
+                        <p className="group-hover:text-hoverItem text-sidebarText text-[14px]">
+                          Xem MV
+                        </p>
+                      </div>
+                      {/* download */}
+                      <div
+                        className="group flex items-center justify-start text-sidebarText cursor-pointer px-3 hover:bg-hoverBgItem"
+                        onClick={() => {
+                          downloadSong(
+                            currentPlayer.src_music,
+                            currentPlayer.name_music
+                          );
+                        }}
+                      >
+                        <p className="mr-2 group-hover:text-hoverItem text-sidebarText">
+                          <BsDownload />
+                        </p>
+                        <p className="group-hover:text-hoverItem text-sidebarText text-[14px]">
+                          Tải xuống
+                        </p>
+                      </div>
+                    </div>
+                  }
+                  trigger="hover"
                   overlayClassName="popover-music-ts"
                 >
                   <FontAwesomeIcon
@@ -181,7 +237,7 @@ export function PlayMusic(props: IPlayMusicProps) {
                     className="cursor-pointer hover:scale-125 trasition-common"
                   />
                 </Popover>
-              </Tooltip>
+              </div>
             </div>
           </div>
           {/* player song */}
@@ -331,7 +387,11 @@ export function PlayMusic(props: IPlayMusicProps) {
           </div>
           {/* action song */}
           <div className="flex flex-1 items-center justify-end gap-x-4">
-            <p>
+            <p
+              onClick={() => {
+                handleWatchMovie(currentPlayer);
+              }}
+            >
               <Tooltip title="Xem MV">
                 <AiOutlinePlaySquare className="cursor-pointer hover:scale-125 trasition-common" />
               </Tooltip>

@@ -15,6 +15,8 @@ export interface AppContextInterface {
   setIsPlaying: (type: boolean) => void;
   propsModal?:PropertiesModal
   setPropsModal: (props: PropertiesModal) => void;
+  dataModal?:any
+  setDataModal: (props: any) => void;
   userInfo?:UserInformation
   setUserInfo: (props: UserInformation | undefined) => void;
   listFavorited?:MusicProperties[]

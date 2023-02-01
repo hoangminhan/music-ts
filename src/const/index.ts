@@ -12,6 +12,7 @@ export const bannerDefault = [
 export const nameModal = {
   MODAL_LAYOUT: "modal_layout",
   MODAL_AUTH: "modal_auth",
+  MODAL_MV:"modal_mv"
 };
 export const DARK_THEME_APP = {
   Dark: "Dark",
@@ -42,7 +43,7 @@ export const THEME_DARK = [
 ];
 export const THEME_LIGHT = [
   { value: "Light", color: "black", title: "Sáng",img:imgSource.lightTheme  },
-  { value: "Grey", color: "black", title: "Xám",img:imgSource.greyTheme  },
-  { value: "Greenlight", color: "black", title: "Xanh nhạt",img:imgSource.greenLightTheme  },
-  { value: "Pinklight", color: "black", title: "Hồng cánh sen",img:imgSource.pinkLightTheme  },
+  // { value: "Grey", color: "black", title: "Xám",img:imgSource.greyTheme  },
+  // { value: "Greenlight", color: "black", title: "Xanh nhạt",img:imgSource.greenLightTheme  },
+  // { value: "Pinklight", color: "black", title: "Hồng cánh sen",img:imgSource.pinkLightTheme  },
 ];

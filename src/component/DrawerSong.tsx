@@ -27,6 +27,7 @@ export function DrawerSong(props: IDrawerSongProps) {
 
   const { handleCheckFavorited, handleClickHeart } = useFirebase();
   const { handleChangePlayMusic } = useHomePage();
+  // scroll to current song
   React.useEffect(() => {
     const timer = setTimeout(() => {
       const element = document.querySelector("#id-song-current");
@@ -36,7 +37,6 @@ export function DrawerSong(props: IDrawerSongProps) {
   }, [typeToggle]);
 
   if (!currentPlayer) return null;
-
   return (
     <div>
       {listPlay?.length ? (
@@ -59,16 +59,6 @@ export function DrawerSong(props: IDrawerSongProps) {
                     className="group w-[48px] h-[48px] rounded-md overflow-hidden relative cursor-pointer"
                     onClick={async () => {
                       await handleChangePlayMusic(play, listPlay, isPlaying);
-                      // if (isPlaying && currentPlayer?._id === play._id) {
-                      //   setIsPlaying(!isPlaying);
-                      // } else {
-                      //   setIsPlaying(true);
-                      // }
-                      // setCurrentPlayer(play);
-                      // sessionStorage.setItem(
-                      //   "currentPlayer",
-                      //   JSON.stringify(play)
-                      // );
                     }}
                   >
                     <img
@@ -124,12 +114,6 @@ export function DrawerSong(props: IDrawerSongProps) {
                             await handleClickHeart(listFavorited, play);
                           }}
                         />
-                      </Tooltip>
-                    </p>
-
-                    <p className="cursor-pointer">
-                      <Tooltip title="Xem thêm">
-                        <FontAwesomeIcon icon={faEllipsis} />
                       </Tooltip>
                     </p>
                   </div>

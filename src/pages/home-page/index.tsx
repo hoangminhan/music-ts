@@ -38,19 +38,19 @@ export default function HomePage(props: IHomePageProps) {
         <Hero />
       </div>
       {/* trending */}
-      <div>
+      <div className="mt-10">
         <CarouselMusic title="Trending" dataCarousel={listMusic} />
       </div>
       {/* new music */}
-      <div>
+      <div className="mt-10">
         <MusicType title="Mới phát hành" newMusics={newMusics.data} />
       </div>
       {/* list favorite */}
-      <div>
+      <div className="mt-10">
         <CarouselMusic title="Top yêu thích" dataCarousel={listFavorites} />
       </div>
       {/* new music */}
-      <div className="mb-[120px]">
+      <div className="mb-[120px] mt-10">
         <MusicType title="Top view" newMusics={listTopView} />
       </div>
     </>

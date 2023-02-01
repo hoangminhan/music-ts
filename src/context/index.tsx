@@ -17,6 +17,7 @@ export const ContextApp = createContext<AppContextInterface>({
   setListPlay: function (value: MusicProperties[]): void {},
   setIsPlaying: function (value: boolean): void {},
   setPropsModal: function (value: PropertiesModal): void {},
+  setDataModal: function (value: any): void {},
   setUserInfo: function (value: UserInformation | undefined): void {},
   setListFavorited: function (value: MusicProperties[]): void {},
   setListReccent: function (value: MusicProperties[]): void {},
@@ -24,7 +25,7 @@ export const ContextApp = createContext<AppContextInterface>({
 
 export const UseContextProvider = ({ children }: propsContext) => {
   const [themeProject, setThemeProject] = useState<string>(
-    sessionStorage.getItem("currentTheme") || "Light"
+    sessionStorage.getItem("currentTheme") || "Bluelight"
   );
   const [currentModal, setCurrentModal] = useState<string>("");
   const [propsModal, setPropsModal] = useState<{}>();
@@ -41,6 +42,8 @@ export const UseContextProvider = ({ children }: propsContext) => {
   const [listReccent, setListReccent] = useState<
     MusicProperties[] | undefined
   >();
+
+  const [dataModal, setDataModal] = useState<any>();
 
   // add currentPlayer to session storage
   useEffect(() => {
@@ -100,6 +103,8 @@ export const UseContextProvider = ({ children }: propsContext) => {
         setListFavorited,
         listReccent,
         setListReccent,
+        dataModal,
+        setDataModal,
       }}
     >
       {children}

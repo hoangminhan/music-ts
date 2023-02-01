@@ -55,9 +55,10 @@
     --background-primary: #170f23;
     --background-secondary: #231b2e;
     --background-sidebar: #231b2e;
-
+    --bg-player: #130c1c;
     --background-modal: #34224f;
     --bg-button-primary: #8d22c3;
+    --bg-hover-drawer: #ffffff1a;
 
     --text-sidebar: ##fff;
     --text-primary: #fff;
@@ -74,7 +75,8 @@
     --background-primary: #0f1a2e;
     --background-secondary: #1b2639;
     --background-sidebar: #1b2639;
-
+    --bg-player: #111f3b;
+    --bg-hover-drawer: #ffffff1a;
     --background-modal: #173b45;
     --bg-button-primary: #158370;
 
@@ -93,7 +95,8 @@
     --background-primary: #162a45;
     --background-secondary: #22354e;
     --background-sidebar: #22354e;
-
+    --bg-player: #172f4f;
+    --bg-hover-drawer: #ffffff1a;
     --background-modal: #203d65;
     --bg-button-primary: #3b68ef;
 
@@ -112,7 +115,8 @@
     --background-primary: #142922;
     --background-secondary: #20342d;
     --background-sidebar: #20342d;
-
+    --bg-player: #19342c;
+    --bg-hover-drawer: #ffffff1a;
     --background-modal: #204b3d;
     --bg-button-primary: #138673;
 
@@ -130,7 +134,8 @@
     --background-primary: #251b18;
     --background-secondary: #302724;
     --background-sidebar: #302724;
-
+    --bg-player: #30201d;
+    --bg-hover-drawer: #ffffff1a;
     --background-modal: #46312b;
     --bg-button-primary: #b65f20;
 
@@ -148,7 +153,8 @@
     --background-primary: #411636;
     --background-secondary: #4b2240;
     --background-sidebar: #4b2240;
-
+    --bg-player: #4c1a3f;
+    --bg-hover-drawer: #ffffff1a;
     --background-modal: #642654;
     --bg-button-primary: #ca4974;
 
@@ -166,7 +172,8 @@
     --background-primary: #2e0f10;
     --background-secondary: #391b1c;
     --background-sidebar: #391b1c;
-
+    --bg-player: #3b1113;
+    --bg-hover-drawer: #ffffff1a;
     --background-modal: #522325;
     --bg-button-primary: #ca4954;
 
@@ -184,7 +191,8 @@
     --background-primary: #e5e3df;
     --background-secondary: #d9d7d4;
     --background-sidebar: #d9d7d4;
-
+    --bg-player: #dedad1;
+    --bg-hover-drawer: #ffffff1a;
     --background-modal: #f7f5f3;
     --bg-button-primary: #644646;
 
@@ -202,7 +210,8 @@
     --background-primary: #ced9d9;
     --background-secondary: #dde4e4;
     --background-sidebar: #dde4e4;
-
+    --bg-player: #172f4f;
+    --bg-hover-drawer: #ffffff1a;
     --background-modal: #e0ebeb;
     --bg-button-primary: #0e8080;
 
@@ -220,7 +229,8 @@
     --background-primary: #ced9d9;
     --background-secondary: #dde4e4;
     --background-sidebar: #dde4e4;
-
+    --bg-player: #172f4f;
+    --bg-hover-drawer: #ffffff1a;
     --background-modal: #e0ebeb;
     --bg-button-primary: #0e8080;
 
@@ -238,7 +248,8 @@
     --background-primary: #f9dbdb;
     --background-secondary: #fbe6e6;
     --background-sidebar: #fbe6e6;
-
+    --bg-player: #172f4f;
+    --bg-hover-drawer: #ffffff1a;
     --background-modal: #fde8e8;
     --bg-button-primary: #b72479;
 
@@ -272,6 +283,7 @@
 }
 .popover-music-ts .ant-popover-inner {
   background-color: var(--background-modal) !important;
+  padding: 12px 0;
 }
 
 :where(.css-dev-only-do-not-override-9ntgx0).ant-btn-primary:not(:disabled):hover {

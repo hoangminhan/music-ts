@@ -28,3 +28,8 @@ export const getNewMusicThunk = createAsyncThunk("new-music", async (params:Para
   return result;
 
 })
+export const getSearchThunk = createAsyncThunk("search-music", async (params:ParamsUrl)=>{
+  const result = await apiMusic.searchMusic(params)
+  return result;
+
+})

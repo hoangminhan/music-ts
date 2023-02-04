@@ -13,6 +13,11 @@ export const apiMusic = {
   getNewMusics : (params:ParamsUrl) :Promise<ResponseList<MusicProperties>>=>{
     const url = `music/new-music`
     return axiosClient.get(url,{params})
+  },
+  // serch
+  searchMusic : (params:ParamsUrl) :Promise<ResponseList<MusicProperties>>=>{
+    const url = `search`
+    return axiosClient.get(url,{params})
   }
 
 }

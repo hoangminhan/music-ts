@@ -41,6 +41,7 @@ export function PlayMusic(props: IPlayMusicProps) {
     setCurrentModal,
     setDataModal,
     setPropsModal,
+    propsModal,
   } = useContext(ContextApp);
   const { downloadSong } = useCommon();
   const [actionPlayer, setActionPlayer] = useState<ParamsPlayerMusic>({
@@ -48,6 +49,7 @@ export function PlayMusic(props: IPlayMusicProps) {
     isRandom: false,
     currentVolume: 50,
   });
+  const accessToken: string = localStorage.getItem("accessToken") || "";
 
   const [duration, setDuration] = useState<number>(0);
   const [timePlayed, setTimePlayed] = useState<string>();
@@ -143,7 +145,7 @@ export function PlayMusic(props: IPlayMusicProps) {
   if (!currentPlayer) return null;
   return (
     <>
-      <div className="fixed bottom-0 left-0 right-0 h-[90px] bg-bgPlayer z-[21] px-5 border-solid border-t-[1px] border-borderTopPlayer">
+      <div className="fixed bottom-0 left-0 right-0 h-[90px] bg-bgPlayer z-[90] px-5 border-solid border-t-[1px] border-borderTopPlayer">
         <div className="flex justify-between items-center h-full gap-x-4">
           {/* content song */}
           <div className="flex flex-1 items-center gap-x-4">
@@ -212,10 +214,19 @@ export function PlayMusic(props: IPlayMusicProps) {
                       <div
                         className="group flex items-center justify-start text-sidebarText cursor-pointer px-3 hover:bg-hoverBgItem"
                         onClick={() => {
-                          downloadSong(
-                            currentPlayer.src_music,
-                            currentPlayer.name_music
-                          );
+                          if (accessToken) {
+                            downloadSong(
+                              currentPlayer.src_music,
+                              currentPlayer.name_music
+                            );
+                          } else {
+                            setCurrentModal("modal_auth");
+                            setPropsModal({
+                              ...propsModal,
+                              width: 500,
+                              closable: false,
+                            });
+                          }
                         }}
                       >
                         <p className="mr-2 group-hover:text-hoverItem text-sidebarText">

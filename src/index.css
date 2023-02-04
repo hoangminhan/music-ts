@@ -293,6 +293,21 @@
 :where(.css-dev-only-do-not-override-9ntgx0).ant-btn-primary:not(:disabled):hover {
   background-color: var(--bg-button-primary) !important;
 }
+.ant-skeleton {
+  display: flex;
+  align-items: center;
+}
+.ant-skeleton-title,
+.ant-skeleton .ant-skeleton-content .ant-skeleton-paragraph > li,
+.ant-skeleton .ant-skeleton-header .ant-skeleton-avatar {
+  background-color: #cfbfbf !important;
+}
+.ant-skeleton
+  .ant-skeleton-content
+  .ant-skeleton-title
+  + .ant-skeleton-paragraph {
+  margin-top: 16px;
+}
 
 @layer components {
   .trasition-common {

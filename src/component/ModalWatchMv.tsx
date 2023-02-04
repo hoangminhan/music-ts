@@ -1,3 +1,4 @@
+import { Spin } from "antd";
 import * as React from "react";
 import ReactPlayer from "react-player/lazy";
 export interface IModalWathcMvProps {
@@ -15,6 +16,7 @@ export function ModalWathcMv(props: IModalWathcMvProps) {
         height={400}
         controls
         playing
+        fallback={<Spin />}
       />
     </div>
   );

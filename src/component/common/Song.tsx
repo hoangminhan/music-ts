@@ -58,8 +58,11 @@ export function Song(props: ISongProps) {
     currentPlayer,
     setCurrentModal,
     setDataModal,
+    propsModal,
     setPropsModal,
   } = React.useContext(ContextApp);
+  const accessToken: string = localStorage.getItem("accessToken") || "";
+
   const { handleChangePlayMusic } = useHomePage();
 
   const { handleCheckFavorited, handleClickHeart } = useFirebase();
@@ -67,11 +70,8 @@ export function Song(props: ISongProps) {
   const handleWatchMovie = (data: MusicProperties) => {
     setIsPlaying(false);
     setCurrentModal("modal_mv");
-
     setDataModal(data);
     setPropsModal({ width: 800 });
-
-    console.log(data);
   };
 
   if (!listSong) return null;
@@ -161,7 +161,16 @@ export function Song(props: ISongProps) {
                             <div
                               className="group flex items-center justify-start text-sidebarText cursor-pointer px-3 hover:bg-hoverBgItem"
                               onClick={() => {
-                                downloadSong(song.src_music, song.name_music);
+                                if (accessToken) {
+                                  downloadSong(song.src_music, song.name_music);
+                                } else {
+                                  setCurrentModal("modal_auth");
+                                  setPropsModal({
+                                    ...propsModal,
+                                    width: 500,
+                                    closable: false,
+                                  });
+                                }
                               }}
                             >
                               <p className="mr-2 group-hover:text-hoverItem text-sidebarText">
@@ -332,7 +341,16 @@ export function Song(props: ISongProps) {
                             <div
                               className="group flex items-center justify-start text-sidebarText cursor-pointer px-3 hover:bg-hoverBgItem"
                               onClick={() => {
-                                downloadSong(song.src_music, song.name_music);
+                                if (accessToken) {
+                                  downloadSong(song.src_music, song.name_music);
+                                } else {
+                                  setCurrentModal("modal_auth");
+                                  setPropsModal({
+                                    ...propsModal,
+                                    width: 500,
+                                    closable: false,
+                                  });
+                                }
                               }}
                             >
                               <p className="mr-2 group-hover:text-hoverItem text-sidebarText">

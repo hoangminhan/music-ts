@@ -12,7 +12,8 @@ const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
-  <Suspense fallback={<div>...loading</div>}>
+  <Suspense fallback={<div className="h-[100vh] bg-bgPrimary">...loading</div>}>
+    {/* <Suspense> */}
     <Provider store={store}>
       <BrowserRouter>
         <UseContextProvider>

@@ -1,12 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { PaginationList, ResponseList } from "types";
 import { MusicProperties } from "types/music.types";
-import { getListFavoritesThunk, getListMusicAsyncThunk, getListTopViewThunk, getNewMusicThunk } from "./homePage-asyn";
+import { getListFavoritesThunk, getListMusicAsyncThunk, getListTopViewThunk, getNewMusicThunk, getSearchThunk } from "./homePage-asyn";
 
 export interface HomePageState {
   listMusic: MusicProperties[];
   listFavorites:MusicProperties[]
   listTopView:MusicProperties[]
+  searchResults:MusicProperties[]
   newMusics: ResponseList<MusicProperties>;
   isLoadingHomePage: boolean;
   pagination: PaginationList;
@@ -15,6 +16,7 @@ const initialState: HomePageState = {
   listMusic: [],
   listFavorites:[],
   listTopView:[],
+  searchResults:[],
   newMusics: {
     data: [],
     pagination: {},
@@ -91,6 +93,13 @@ export const homePageSlice = createSlice({
       data: MusicProperties[];
     }>)=>{
       state.listTopView = action.payload.data
+    })
+    // search
+    builder.addCase(getSearchThunk.fulfilled,(state,action: PayloadAction<{
+      pagination: PaginationList;
+      data: MusicProperties[];
+    }>)=>{
+      state.searchResults = action.payload.data
     })
   },
 });

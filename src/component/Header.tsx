@@ -5,11 +5,14 @@ import {
   faGear,
   faSearch,
   faShirt,
+  faSpinner,
   faUpload,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { message, Popover, Tooltip } from "antd";
+import { Empty, message, Popover, Tooltip } from "antd";
+import { useAppDispatch } from "app/store";
 import { ContextApp } from "context";
+import { handleClearResultSearch } from "features/home-page";
 import { getAuth, signOut } from "firebase/auth";
 import { useHomePage } from "hooks";
 import { useContext, useEffect, useState } from "react";
@@ -64,6 +67,7 @@ export function Header(props: HeaderProps) {
     propsModal,
     userInfo,
     setUserInfo,
+    currentPlayer,
     setCurrentPlayer,
     setIsPlaying,
   } = useContext(ContextApp);
@@ -74,8 +78,12 @@ export function Header(props: HeaderProps) {
   const accessToken: string = localStorage.getItem("accessToken") || "";
   const [valueSearch, setValueSearch] = useState<string>();
   const [debouncedValue, setDebouncedValue] = useState(valueSearch);
-  console.log({ searchResults });
+  const [isLoadingSearch, setIsLoadingSearch] = useState<boolean>(false);
+  const dispatch = useAppDispatch();
 
+  /**
+   * If the user is logged in, open the upload modal. If the user is not logged in, open the auth modal
+   */
   const handleUploadSong = (): void => {
     if (accessToken) {
       setCurrentModal("modal_upload");
@@ -86,18 +94,29 @@ export function Header(props: HeaderProps) {
     }
   };
 
+  /* It's a debounce function. It will wait for 1 second before setting the debouncedValue. */
   useEffect(() => {
-    const timer = setTimeout(() => {
-      console.log({ valueSearch });
-      setDebouncedValue(valueSearch);
-    }, 1000);
+    const timer = setTimeout(
+      () => {
+        console.log({ valueSearch });
+        setDebouncedValue(valueSearch);
+      },
+      valueSearch ? 1000 : 0
+    );
     return () => {
       clearTimeout(timer);
     };
   }, [valueSearch]);
   useEffect(() => {
     if (debouncedValue) {
-      handleSearchMusic({ query: debouncedValue });
+      const getData = async () => {
+        setIsLoadingSearch(true);
+        await handleSearchMusic({ query: debouncedValue });
+        setIsLoadingSearch(false);
+      };
+      getData();
+    } else {
+      dispatch(handleClearResultSearch());
     }
   }, [debouncedValue]);
 
@@ -113,7 +132,7 @@ export function Header(props: HeaderProps) {
         />
       </div>
       {/* search */}
-      <div className="bg-bgSecond rounded-[20px] h-[40px] flex items-center relative w-[100%] max-w-[440px] mr-8 z-[99]">
+      <div className="bg-bgSecond rounded-[20px] h-[40px] flex items-center relative w-[100%] max-w-[440px] z-[99]">
         <button className="absolute left-4">
           <FontAwesomeIcon icon={faSearch} />
         </button>
@@ -129,35 +148,72 @@ export function Header(props: HeaderProps) {
         {/* button close */}
         <button
           className={`absolute right-4 ${valueSearch ? "block" : "hidden"}`}
+          onClick={() => {
+            setValueSearch("");
+            setDebouncedValue("");
+            dispatch(handleClearResultSearch());
+          }}
         >
-          <FontAwesomeIcon icon={faClose} />
+          {isLoadingSearch ? (
+            <FontAwesomeIcon icon={faSpinner} spin />
+          ) : (
+            <FontAwesomeIcon icon={faClose} />
+          )}
         </button>
 
         {/* results search */}
-        <div className="absolute left-0 right-0 top-12 min-h-[60px] z-[99] bg-bgModal rounded-2xl p-4 pb-0">
-          {searchResults.map((song, index) => {
-            return (
-              <div
-                key={song._id}
-                className="flex items-center gap-x-2 p-2 mb-3 hover:bg-hoverBgItem cursor-pointer"
-                onClick={() => {
-                  setCurrentPlayer(song);
-                  sessionStorage.setItem("currentPlayer", JSON.stringify(song));
-                  setIsPlaying(true);
-                }}
-              >
-                <img
-                  src={song.image_music}
-                  className="w-[32px] h-[32px] rounded-md"
-                  alt=""
-                />
-                <p>{song.name_music}</p>
+        {searchResults?.length || debouncedValue ? (
+          <div
+            className={`
+          absolute left-0 right-0 top-12 min-h-[60px] max-h-[300px] z-[99] bg-bgModal rounded-2xl p-4 pb-0  custom-scroll ${
+            searchResults?.length ? "overflow-y-scroll" : ""
+          }`}
+          >
+            {searchResults?.length ? (
+              <>
+                {searchResults.map((song, index) => {
+                  return (
+                    <div
+                      key={song._id}
+                      className={`flex items-center gap-x-2 p-2 mb-3 hover:bg-hoverBgItem cursor-pointer
+                      ${song._id === currentPlayer?._id ? "bg-hoverBgItem" : ""}
+                      `}
+                      onClick={() => {
+                        setCurrentPlayer(song);
+                        sessionStorage.setItem(
+                          "currentPlayer",
+                          JSON.stringify(song)
+                        );
+                        setIsPlaying(true);
+                      }}
+                    >
+                      <img
+                        src={song.image_music}
+                        className="w-[32px] h-[32px] rounded-md"
+                        alt=""
+                      />
+                      <p>{song.name_music}</p>
+                    </div>
+                  );
+                })}
+              </>
+            ) : (
+              <div className="flex justify-center items-center">
+                <Empty description={false} imageStyle={{ fontSize: "50px" }} />
               </div>
-            );
-          })}
-        </div>
+            )}
+          </div>
+        ) : (
+          ""
+        )}
+
         {/* overlay */}
-        <div className="bg-[#0f0f0f] opacity-90 fixed inset-0 top-[70px] z-[90]"></div>
+
+        {searchResults?.length ? (
+          <div className="bg-[#0f0f0f] opacity-90 fixed inset-0 top-[70px] z-[90]"></div>
+        ) : (
+          ""
+        )}
       </div>
 
       {/* action */}

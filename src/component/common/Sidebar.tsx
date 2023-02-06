@@ -2,7 +2,6 @@ import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Logo } from "component/Logo";
 import { Menu } from "component/Menu";
-import * as React from "react";
 
 export interface SidebarProps {
   handleToggleMenu: () => void;

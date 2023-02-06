@@ -5,6 +5,7 @@ import {
   faMusic,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { message } from "antd";
 import { ContextApp } from "context";
 import * as React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -28,7 +29,7 @@ const menus: MenuSidebar[] = [
   {
     title: "Đã tải lên",
     icon: faCloudArrowUp,
-    path: "/dem2",
+    path: "/upload",
   },
 ];
 interface MenuProps {
@@ -38,15 +39,24 @@ interface MenuProps {
 export function Menu(props: MenuProps) {
   // <FontAwesomeIcon icon="fa-regular fa-house" /> ffffff1a
   const location = useLocation();
+
   const { pathname } = location;
   const accessToken = localStorage.getItem("accessToken") || "";
   const navigate = useNavigate();
   const { setCurrentModal, setPropsModal, propsModal } = React.useContext(
     ContextApp
   );
+  /**
+   * If the user is logged in, navigate to the path, otherwise open the login modal
+   * @param {string} path - string - the path to navigate to
+   */
   const handleNagivation = (path: string) => {
     if (accessToken || path === "/") {
-      navigate(path);
+      if (path === "/upload") {
+        message.warning("Chức năng đang được phát triển");
+      } else {
+        navigate(path);
+      }
     } else {
       setCurrentModal("modal_auth");
       setPropsModal({ ...propsModal, width: 500, closable: false });

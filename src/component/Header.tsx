@@ -70,8 +70,13 @@ export function Header(props: HeaderProps) {
     currentPlayer,
     setCurrentPlayer,
     setIsPlaying,
+    listReccent,
   } = useContext(ContextApp);
-  const { searchResults, handleSearchMusic } = useHomePage();
+  const {
+    searchResults,
+    handleSearchMusic,
+    handleChangePlayMusic,
+  } = useHomePage();
   const { handleToggleMenu } = props;
   const navigate = useNavigate();
 
@@ -79,6 +84,7 @@ export function Header(props: HeaderProps) {
   const [valueSearch, setValueSearch] = useState<string>();
   const [debouncedValue, setDebouncedValue] = useState(valueSearch);
   const [isLoadingSearch, setIsLoadingSearch] = useState<boolean>(false);
+  const [isShowOverlay, setIsShowOverlay] = useState(false);
   const dispatch = useAppDispatch();
 
   /**
@@ -113,10 +119,12 @@ export function Header(props: HeaderProps) {
         setIsLoadingSearch(true);
         await handleSearchMusic({ query: debouncedValue });
         setIsLoadingSearch(false);
+        setIsShowOverlay(true);
       };
       getData();
     } else {
       dispatch(handleClearResultSearch());
+      setIsShowOverlay(false);
     }
   }, [debouncedValue]);
 
@@ -179,12 +187,13 @@ export function Header(props: HeaderProps) {
                       ${song._id === currentPlayer?._id ? "bg-hoverBgItem" : ""}
                       `}
                       onClick={() => {
-                        setCurrentPlayer(song);
-                        sessionStorage.setItem(
-                          "currentPlayer",
-                          JSON.stringify(song)
-                        );
-                        setIsPlaying(true);
+                        // setCurrentPlayer(song);
+                        // sessionStorage.setItem(
+                        //   "currentPlayer",
+                        //   JSON.stringify(song)
+                        // );
+                        // setIsPlaying(true);
+                        handleChangePlayMusic(song, searchResults, true);
                       }}
                     >
                       <img
@@ -209,8 +218,13 @@ export function Header(props: HeaderProps) {
 
         {/* overlay */}
 
-        {searchResults?.length ? (
-          <div className="bg-[#0f0f0f] opacity-90 fixed inset-0 top-[70px] z-[90]"></div>
+        {isShowOverlay ? (
+          <div
+            className="bg-[#0f0f0f] opacity-90 fixed inset-0 top-[70px] z-[90]"
+            onClick={() => {
+              setIsShowOverlay(false);
+            }}
+          ></div>
         ) : (
           ""
         )}

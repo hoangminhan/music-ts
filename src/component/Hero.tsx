@@ -10,14 +10,14 @@ export function Hero(props: HeroProps) {
       className="rounded-lg"
       spaceBetween={30}
       slidesPerView={2}
-      // effect={"coverflow"}
-      // coverflowEffect={{
-      //   rotate: 50,
-      //   stretch: 0,
-      //   depth: 100,
-      //   modifier: 1,
-      //   slideShadows: true,
-      // }}
+      effect={"coverflow"}
+      coverflowEffect={{
+        rotate: 50,
+        stretch: 0,
+        depth: 100,
+        modifier: 1,
+        slideShadows: true,
+      }}
       loop={true}
       centeredSlides={true}
       autoplay={{
@@ -28,8 +28,8 @@ export function Hero(props: HeroProps) {
         clickable: true,
       }}
       navigation={false}
-      // modules={[EffectCoverflow, Autoplay, Pagination, Navigation]}
-      modules={[Autoplay, Pagination, Navigation]}
+      modules={[EffectCoverflow, Autoplay, Pagination, Navigation]}
+      // modules={[Autoplay, Pagination, Navigation]}
       autoHeight={true}
       breakpoints={{
         320: {
